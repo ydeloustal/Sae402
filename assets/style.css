@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap");
+
+:root {
+	--desktop-bg: #1e1e1e;
+	--window-bg: #000000;
+	--screen-bg: #000000;
+	--text-default: #f2f2f2;
+	--text-system: #9cdcfe;
+	--text-narrator: #d7ba7d;
+	--text-character: #f2f2f2;
+	--text-tag: #4ec9b0;
+	--chrome-border: #404040;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	min-height: 100%;
+}
+
+body {
+	font-family: "Inconsolata", Consolas, monospace;
+	color: var(--text-default);
+	background: var(--screen-bg);
+}
+
+.page_terminal {
+	display: block;
+	min-height: 100vh;
+	padding: 0;
+}
+
+.fenetre_terminal {
+	width: 100vw;
+	height: 100vh;
+	background: var(--window-bg);
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.header_terminal {
+	background: linear-gradient(180deg, #04070f, #01040a);
+	border-bottom: 1px solid #0a1320;
+	padding: 0.55rem 0.9rem;
+}
+
+.titre_terminal {
+	margin: 0;
+	font-size: 0.95rem;
+	font-weight: 700;
+	color: #ffffff;
+}
+
+.corps_terminal {
+	flex: 1;
+	background: var(--screen-bg);
+	padding: 1rem;
+	overflow-y: auto;
+}
+
+.ligne {
+	margin: 0 0 0.35rem;
+	line-height: 1.4;
+	white-space: pre-wrap;
+	word-break: normal;
+}
+
+.ligne_commande {
+	display: flex;
+	align-items: center;
+	gap: 0.55rem;
+	margin: 0;
+}
+
+.ligne_systeme {
+	color: var(--text-system);
+}
+
+.ligne_narrateur {
+	color: var(--text-narrator);
+}
+
+.ligne_perso {
+	color: var(--text-character);
+}
+
+.invite_terminal {
+	color: #f2f2f2;
+	font-weight: 700;
+	margin-right: 0.45rem;
+}
+
+.horodatage {
+	color: #858585;
+	margin-right: 0.6rem;
+}
+
+.etiquette {
+	color: var(--text-tag);
+	margin-right: 0.55rem;
+}
+
+#commandInput {
+	flex: 1;
+	min-width: 0;
+	border: none;
+	outline: none;
+	background: transparent;
+	color: var(--text-default);
+	font: inherit;
+	font-size: 1rem;
+}
+
+#commandInput::placeholder {
+	color: #7d7d7d;
+}
+
+#commandInput:focus {
+	caret-color: #ffffff;
+}

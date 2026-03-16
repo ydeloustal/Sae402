@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,21 @@
     <title>Récit interactif</title>
 </head>
 <body>
-    
-    <script src="assets/script.js"></script>
+    <main class="page_terminal">
+        <section class="fenetre_terminal" aria-label="Terminal narratif">
+            <header class="header_terminal">
+                <p class="titre_terminal">Terminal numérique inconnu - BD Narrative Host</p>
+            </header>
+
+            <div class="corps_terminal" id="terminalBody" role="log" aria-live="polite">
+                <label class="ligne ligne_commande" id="inputLine" for="commandInput">
+                    <span class="invite_terminal">PS C:\Users\???\???&gt;</span>
+                    <input id="commandInput" type="text" autocomplete="off" spellcheck="false" placeholder="Tape next puis Entree" />
+                </label>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/index.js"></script>
 </body>
 </html>
