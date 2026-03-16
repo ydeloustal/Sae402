@@ -4,10 +4,10 @@
   "usage": {
     "type": "ascii",
     "preset": 70,
-    "label": "Nom de la scene",
+    "label": "Nom du Truc",
     "ascii": [
       "+----------------------+",
-      "| Exemple personnalise |",
+      "| Exemple Possible ahh |",
       "+----------------------+"
     ]
   }

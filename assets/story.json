@@ -7,14 +7,14 @@
     },
     {
       "type": "system",
-      "text": "Processus humain detecte dans la console."
+      "text": "Processus humain detecté dans la console."
     }
   ],
   "panels": [
     {
       "speaker": "Narrateur",
       "type": "narrator",
-      "text": "L'ecran noir affiche une seule ligne: 'Ne ferme pas cette fenetre'."
+      "text": "L'ecran affiche une seule ligne: 'Ne ferme pas cette fenetre YOAN sinon tu meurt'."
     },
     {
       "type": "ascii",
