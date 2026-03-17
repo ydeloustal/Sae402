@@ -1,0 +1,14 @@
+{
+  "presetWidths": [41, 51, 71, 81, 101],
+  "defaultHeight": 12,
+  "usage": {
+    "type": "ascii",
+    "preset": 70,
+    "label": "Nom du Truc",
+    "ascii": [
+      "+----------------------+",
+      "| Exemple Possible ahh |",
+      "+----------------------+"
+    ]
+  }
+}
