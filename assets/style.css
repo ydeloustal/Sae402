@@ -81,7 +81,6 @@ body {
 	display: block;
 	font-family: "Roboto Mono", "Cascadia Mono", "Ubuntu Mono", Consolas, "Courier New", monospace;
 	white-space: pre;
-	overflow-x: auto;
 	line-height: 1.15;
 	letter-spacing: 0;
 	tab-size: 4;
