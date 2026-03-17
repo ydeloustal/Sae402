@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap");
 
 :root {
 	--desktop-bg: #1e1e1e;
@@ -23,9 +23,11 @@ body {
 }
 
 body {
-	font-family: "Inconsolata", Consolas, monospace;
+	font-family: "Roboto Mono", "Cascadia Mono", "Ubuntu Mono", Consolas, "Courier New", monospace;
 	color: var(--text-default);
 	background: var(--screen-bg);
+	font-variant-ligatures: none;
+	font-feature-settings: "liga" 0, "calt" 0;
 }
 
 .page_terminal {
@@ -71,6 +73,16 @@ body {
 	line-height: 1.4;
 	white-space: pre-wrap;
 	word-break: normal;
+	letter-spacing: 0;
+}
+
+.ligne_ascii {
+	font-family: "Roboto Mono", "Cascadia Mono", "Ubuntu Mono", Consolas, "Courier New", monospace;
+	white-space: pre;
+	overflow-x: auto;
+	line-height: 1.2;
+	font-variant-ligatures: none;
+	font-feature-settings: "liga" 0, "calt" 0;
 }
 
 .ligne_commande {

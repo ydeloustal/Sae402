@@ -9,7 +9,7 @@ const state = {
 	hasPrintedEnd: false,
 	isStoryEnded: false,
 	hasTypedOnce: false,
-	asciiWidths: [40, 50, 70, 80, 100],
+	asciiWidths: [41, 51, 71, 81, 101],
 	asciiDefaultHeight: 12,
 };
 
@@ -76,6 +76,9 @@ function getTimestamp() {
 function printLine(text, type = "character", instant = false, options = { mode: "log" }) {
 	const line = document.createElement("p");
 	line.className = `ligne ${classeParType[type] || "ligne_perso"}`;
+	if (options.extraClass) {
+		line.classList.add(options.extraClass);
+	}
 
 	const mode = options.mode || "log";
 	const content = document.createElement("span");
@@ -149,6 +152,27 @@ function normalizeAsciiLines(value) {
 	return null;
 }
 
+function normalizeAsciiGlyphs(line) {
+	return line
+		.replace(/\r/g, "")
+		.replace(/[▐▌│┃]/g, "|")
+		.replace(/[▀▄─━]/g, "-")
+		.replace(/[┌┐└┘]/g, "+");
+}
+
+function fitAsciiLines(lines, fallbackWidth) {
+	const cleanLines = lines.map((line) => normalizeAsciiGlyphs(line));
+	const widest = cleanLines.reduce((max, line) => Math.max(max, line.length), 0);
+	const targetWidth = Math.max(Number(fallbackWidth) || 0, widest);
+
+	return cleanLines.map((line) => {
+		if (line.length > targetWidth) {
+			return line.slice(0, targetWidth);
+		}
+		return line.padEnd(targetWidth, " ");
+	});
+}
+
 function buildAsciiPreset(width, height, label) {
 	const safeWidth = Math.max(12, Math.floor(width));
 	const safeHeight = Math.max(6, Math.floor(height));
@@ -174,10 +198,11 @@ function buildAsciiPreset(width, height, label) {
 }
 
 function resolveAsciiEntry(entry) {
-	const requested = Number(entry.preset || entry.width || 70);
-	const presetWidth = state.asciiWidths.includes(requested) ? requested : 70;
-	const lines = normalizeAsciiLines(entry.ascii)
+	const requested = Number(entry.preset || entry.width || 71);
+	const presetWidth = state.asciiWidths.includes(requested) ? requested : 71;
+	const rawLines = normalizeAsciiLines(entry.ascii)
 		|| buildAsciiPreset(presetWidth, state.asciiDefaultHeight, entry.label);
+	const lines = fitAsciiLines(rawLines, presetWidth);
 
 	return {
 		lines,
@@ -191,6 +216,7 @@ async function printAscii(entry) {
 	await printLine(`[ASCII] ${label} (${width} colonnes)`, "system", true, { mode: "log" });
 	await printLine(lines.join("\n"), "character", false, {
 		mode: "prompt",
+		extraClass: "ligne_ascii",
 		typing: {
 			intervalMs: 1,
 			charsPerTick: 5,
@@ -220,7 +246,7 @@ async function printNext() {
 	state.pointer += 1;
 
 	if (entry.type === "ascii") {
-		const width = Number(entry.preset || entry.width || 70);
+		const width = Number(entry.preset || entry.width || 71);
 		printLine(`Show-AsciiArt -Width ${width}`, "character", true, { mode: "prompt" });
 		await printAscii(entry);
 	} else {
