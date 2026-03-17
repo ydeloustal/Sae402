@@ -20,6 +20,286 @@ const classeParType = {
 	character: "ligne_perso",
 };
 
+function isHexDigit(char) {
+	return /^[0-9a-fA-F]$/.test(char);
+}
+
+function isValidJsonEscape(source, slashIndex) {
+	const next = source[slashIndex + 1];
+	if (!next) {
+		return false;
+	}
+
+	if (/^["\\/bfnrt]$/.test(next)) {
+		return true;
+	}
+
+	if (next === "u") {
+		const h1 = source[slashIndex + 2];
+		const h2 = source[slashIndex + 3];
+		const h3 = source[slashIndex + 4];
+		const h4 = source[slashIndex + 5];
+		return Boolean(h1 && h2 && h3 && h4)
+			&& isHexDigit(h1)
+			&& isHexDigit(h2)
+			&& isHexDigit(h3)
+			&& isHexDigit(h4);
+	}
+
+	return false;
+}
+
+function sanitizeJsonBackslashes(source) {
+	let fixedCount = 0;
+	let inString = false;
+	let previousWasEscape = false;
+	let result = "";
+
+	for (let i = 0; i < source.length; i += 1) {
+		const char = source[i];
+
+		if (!inString) {
+			result += char;
+			if (char === '"') {
+				inString = true;
+			}
+			continue;
+		}
+
+		if (char === '"' && !previousWasEscape) {
+			inString = false;
+			result += char;
+			continue;
+		}
+
+		if (char === "\\" && !previousWasEscape) {
+			if (isValidJsonEscape(source, i)) {
+				result += char;
+				previousWasEscape = true;
+			} else {
+				// Rend un antislash "isolé" valide en JSON (ex: C:\Users)
+				result += "\\\\";
+				fixedCount += 1;
+				previousWasEscape = false;
+			}
+			continue;
+		}
+
+		result += char;
+		if (previousWasEscape) {
+			previousWasEscape = false;
+		}
+	}
+
+	return { sanitized: result, fixedCount };
+}
+
+function preserveEscapedForwardSlash(source) {
+	let convertedCount = 0;
+	let inString = false;
+	let previousWasEscape = false;
+	let result = "";
+
+	for (let i = 0; i < source.length; i += 1) {
+		const char = source[i];
+
+		if (!inString) {
+			result += char;
+			if (char === '"') {
+				inString = true;
+			}
+			continue;
+		}
+
+		if (char === '"' && !previousWasEscape) {
+			inString = false;
+			result += char;
+			continue;
+		}
+
+		if (char === "\\") {
+			let runLength = 1;
+			while (source[i + runLength] === "\\") {
+				runLength += 1;
+			}
+
+			const afterRun = source[i + runLength];
+			if (afterRun === "/") {
+				const needsOneMore = runLength % 2 !== 0;
+				result += "\\".repeat(runLength + (needsOneMore ? 1 : 0));
+				result += "/";
+				if (needsOneMore) {
+					convertedCount += 1;
+				}
+				i += runLength;
+				previousWasEscape = false;
+				continue;
+			}
+		}
+
+		result += char;
+		if (char === "\\" && !previousWasEscape) {
+			previousWasEscape = true;
+		} else if (previousWasEscape) {
+			previousWasEscape = false;
+		}
+	}
+
+	return { normalized: result, convertedCount };
+}
+
+function parseStoryJsonWithTolerance(rawText) {
+	const { normalized, convertedCount } = preserveEscapedForwardSlash(rawText);
+
+	const direct = (() => {
+		try {
+			return { story: JSON.parse(normalized), fixedCount: 0, convertedCount };
+		} catch {
+			return null;
+		}
+	})();
+
+	if (direct) {
+		return direct;
+	}
+
+	const { sanitized, fixedCount } = sanitizeJsonBackslashes(normalized);
+	return { story: JSON.parse(sanitized), fixedCount, convertedCount };
+}
+
+function skipWhitespace(source, startIndex) {
+	let index = startIndex;
+	while (index < source.length && /\s/.test(source[index])) {
+		index += 1;
+	}
+	return index;
+}
+
+function decodeLiteralAsciiString(rawValue) {
+	let result = "";
+
+	for (let i = 0; i < rawValue.length; i += 1) {
+		if (rawValue[i] === "\\" && rawValue[i + 1] === '"') {
+			result += '"';
+			i += 1;
+			continue;
+		}
+
+		result += rawValue[i];
+	}
+
+	return result;
+}
+
+function readLiteralJsonString(source, startIndex) {
+	let rawValue = "";
+	let backslashRun = 0;
+
+	for (let index = startIndex + 1; index < source.length; index += 1) {
+		const char = source[index];
+
+		if (char === '"' && backslashRun % 2 === 0) {
+			return {
+				value: decodeLiteralAsciiString(rawValue),
+				endIndex: index + 1,
+			};
+		}
+
+		rawValue += char;
+		if (char === "\\") {
+			backslashRun += 1;
+		} else {
+			backslashRun = 0;
+		}
+	}
+
+	throw new Error("Chaine ASCII non terminee dans story.json");
+}
+
+function extractAsciiArraysFromSource(source) {
+	const arrays = [];
+	let inString = false;
+	let previousWasEscape = false;
+
+	for (let i = 0; i < source.length; i += 1) {
+		const char = source[i];
+
+		if (!inString) {
+			if (source.startsWith('"ascii"', i)) {
+				let cursor = skipWhitespace(source, i + '"ascii"'.length);
+				if (source[cursor] !== ":") {
+					continue;
+				}
+
+				cursor = skipWhitespace(source, cursor + 1);
+				if (source[cursor] !== "[") {
+					continue;
+				}
+
+				cursor += 1;
+				const lines = [];
+
+				while (cursor < source.length) {
+					cursor = skipWhitespace(source, cursor);
+					if (source[cursor] === "]") {
+						arrays.push(lines);
+						i = cursor;
+						break;
+					}
+
+					if (source[cursor] === ",") {
+						cursor += 1;
+						continue;
+					}
+
+					if (source[cursor] !== '"') {
+						throw new Error("Format ASCII invalide dans story.json");
+					}
+
+					const parsedString = readLiteralJsonString(source, cursor);
+					lines.push(parsedString.value);
+					cursor = parsedString.endIndex;
+				}
+			}
+
+			if (char === '"') {
+				inString = true;
+			}
+			continue;
+		}
+
+		if (char === '"' && !previousWasEscape) {
+			inString = false;
+			continue;
+		}
+
+		if (char === "\\" && !previousWasEscape) {
+			previousWasEscape = true;
+		} else if (previousWasEscape) {
+			previousWasEscape = false;
+		}
+	}
+
+	return arrays;
+}
+
+function restoreLiteralAsciiArrays(story, source) {
+	const asciiArrays = extractAsciiArraysFromSource(source);
+	let asciiIndex = 0;
+
+	for (const panel of story.panels || []) {
+		if (!Array.isArray(panel.ascii)) {
+			continue;
+		}
+
+		const literalAscii = asciiArrays[asciiIndex];
+		if (Array.isArray(literalAscii)) {
+			panel.ascii = literalAscii;
+		}
+		asciiIndex += 1;
+	}
+}
+
 async function loadStory() {
 	try {
 		const [storyResponse, presetsResponse] = await Promise.all([
@@ -41,7 +321,9 @@ async function loadStory() {
 			}
 		}
 
-		const story = await storyResponse.json();
+		const storyText = await storyResponse.text();
+		const { story, fixedCount, convertedCount } = parseStoryJsonWithTolerance(storyText);
+		restoreLiteralAsciiArrays(story, storyText);
 		const intro = Array.isArray(story.intro) ? story.intro : [];
 		const panels = Array.isArray(story.panels) ? story.panels : [];
 
@@ -51,6 +333,12 @@ async function loadStory() {
 		printLine(`Presets ASCII: ${state.asciiWidths.join(", ")} colonnes`, "system", true);
 		printLine("Commandes: next, help", "system", true);
 		printLine("Tape 'next' puis Entree pour avancer.", "system", true);
+		if (fixedCount > 0) {
+			printLine(`Correction auto JSON: ${fixedCount} antislash(s) ajuste(s).`, "system", true);
+		}
+		if (convertedCount > 0) {
+			printLine(`Correction auto JSON: ${convertedCount} sequence(s) '\\/' preservee(s).`, "system", true);
+		}
 	} catch (error) {
 		printLine("Erreur de chargement du récit JSON.", "system", true);
 		printLine(String(error), "system", true);
@@ -94,6 +382,8 @@ function printLine(text, type = "character", instant = false, options = { mode: 
 		tag.textContent = type === "system" ? "[INFO ]" : "[STORY]";
 
 		line.append(timestamp, tag, content);
+	} else if (mode === "plain") {
+		line.append(content);
 	} else {
 		const prompt = document.createElement("span");
 		prompt.className = "invite_terminal";
@@ -105,12 +395,12 @@ function printLine(text, type = "character", instant = false, options = { mode: 
 	terminalBody.insertBefore(line, inputLine);
 
 	if (instant) {
-		content.textContent = mode === "log" ? textToPrint : ` ${textToPrint}`;
+		content.textContent = mode === "log" || mode === "plain" ? textToPrint : ` ${textToPrint}`;
 		scrollTerminal();
 		return Promise.resolve();
 	}
 
-	const prefix = mode === "log" ? "" : " ";
+	const prefix = mode === "log" || mode === "plain" ? "" : " ";
 	const typing = options.typing || {};
 	return typeWrite(content, `${prefix}${textToPrint}`, typing);
 }
@@ -215,7 +505,7 @@ async function printAscii(entry) {
 	const { lines, width, label } = resolveAsciiEntry(entry);
 	await printLine(`[ASCII] ${label} (${width} colonnes)`, "system", true, { mode: "log" });
 	await printLine(lines.join("\n"), "character", false, {
-		mode: "prompt",
+		mode: "plain",
 		extraClass: "ligne_ascii",
 		typing: {
 			intervalMs: 1,
