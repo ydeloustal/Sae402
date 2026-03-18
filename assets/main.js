@@ -26,6 +26,7 @@ import { printCommandEcho } from "./functions/printCommandEcho.js";
 import { normalizeCommand } from "./functions/normalizeCommand.js";
 import { runCommand } from "./functions/runCommand.js";
 import { initLogsAutoScroll } from "./functions/initLogsAutoScroll.js";
+import { keepTerminalInputFocused } from "./functions/keepTerminalInputFocused.js";
 
 const KNOWN_COMMANDS = ["next", "help","ping"];
 
@@ -107,4 +108,4 @@ commandInput.addEventListener("input", () => {
 
 loadStory();
 initLogsAutoScroll();
-commandInput.focus();
+keepTerminalInputFocused(commandInput);
