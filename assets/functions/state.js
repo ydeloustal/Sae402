@@ -10,10 +10,13 @@ export const classeParType = {
 
 export const state = {
     queue: [],
+    zones: {},
     pointer: 0,
     isTyping: false,
     hasPrintedEnd: false,
     isStoryEnded: false,
+    awaitingZoneChoice: false,
+    hasPromptedZoneChoice: false,
     hasTypedOnce: false,
     asciiWidths: [43, 53, 73, 83, 103],
     asciiDefaultHeight: 12,
