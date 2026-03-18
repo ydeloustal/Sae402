@@ -11,6 +11,8 @@ const state = {
 	hasTypedOnce: false,
 	asciiWidths: [41, 51, 71, 81, 101],
 	asciiDefaultHeight: 12,
+	history: [],
+	historyPointer: -1,
 };
 
 const shellPath = "C:\\Users\\???\\???";
@@ -379,12 +381,16 @@ function printLine(text, type = "character", instant = false, options = { mode: 
 
 		const tag = document.createElement("span");
 		tag.className = "etiquette";
-		tag.textContent = type === "system" ? "[INFO ]" : "[STORY]";
+		tag.textContent = type === "system" ? "[INFO]" : "[STORY]";
 
 		line.append(timestamp, tag, content);
 	} else if (mode === "plain") {
 		line.append(content);
 	} else {
+		const timestamp = document.createElement("span");
+		timestamp.className = "horodatage";
+		timestamp.textContent = getTimestamp();
+
 		const prompt = document.createElement("span");
 		prompt.className = "invite_terminal";
 		prompt.textContent = `PS ${shellPath}>`;
@@ -582,19 +588,81 @@ async function runCommand(rawCommand) {
 		return;
 	}
 
+	if (command === "ping") {
+		printLine("pong", "character", true);
+		return;
+	}
+
 	printLine(`Commande inconnue: ${command}`, "system", true);
 	printLine("Tape 'help' pour voir les commandes.", "system", true);
 }
 
+const KNOWN_COMMANDS = ["next", "help","ping"];
+
 commandInput.addEventListener("keydown", async (event) => {
-	if (event.key === "Enter") {
+	// ── Flèche haut : commande précédente ──────────────────────────
+	if (event.key === "ArrowUp") {
 		event.preventDefault();
-		if (state.isTyping) {
+		if (state.history.length === 0) return;
+		state.historyPointer = Math.min(
+			state.historyPointer + 1,
+			state.history.length - 1
+		);
+		commandInput.value = state.history[state.historyPointer];
+		// place le curseur en fin de texte
+		requestAnimationFrame(() => {
+			commandInput.selectionStart = commandInput.selectionEnd = commandInput.value.length;
+		});
+		return;
+	}
+
+	// ── Flèche bas : commande suivante ────────────────────────────
+	if (event.key === "ArrowDown") {
+		event.preventDefault();
+		if (state.historyPointer <= 0) {
+			state.historyPointer = -1;
+			commandInput.value = "";
 			return;
 		}
+		state.historyPointer -= 1;
+		commandInput.value = state.history[state.historyPointer];
+		requestAnimationFrame(() => {
+			commandInput.selectionStart = commandInput.selectionEnd = commandInput.value.length;
+		});
+		return;
+	}
+
+	// ── Tab : autocomplétion ──────────────────────────────────────
+	if (event.key === "Tab") {
+		event.preventDefault();
+		const partial = commandInput.value.trim().toLowerCase();
+		if (!partial) return;
+		const matches = KNOWN_COMMANDS.filter((cmd) => cmd.startsWith(partial));
+		if (matches.length === 1) {
+			// complétion unique → on remplace
+			commandInput.value = matches[0];
+		} else if (matches.length > 1) {
+			// plusieurs possibilités → on les affiche
+			printLine(`Complétion : ${matches.join("  ")}`, "system", true);
+		}
+		return;
+	}
+
+	// ── Entrée : exécution ────────────────────────────────────────
+	if (event.key === "Enter") {
+		event.preventDefault();
+		if (state.isTyping) return;
 
 		const raw = commandInput.value;
 		commandInput.value = "";
+
+		// ajout à l'historique (sans doublon consécutif)
+		const normalized = raw.trim();
+		if (normalized && state.history[0] !== normalized) {
+			state.history.unshift(normalized);
+		}
+		state.historyPointer = -1;
+
 		await runCommand(raw);
 	}
 });
