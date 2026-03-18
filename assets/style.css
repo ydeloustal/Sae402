@@ -21,8 +21,8 @@
 
 html,
 body {
-  min-height: 100vh;
-  overflow-x: hidden;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -37,6 +37,7 @@ body {
     "calt" 0;
   display: grid;
   grid-template-columns: 270px 1fr;
+  height: 100vh;
 }
 
 /* HEADER */
@@ -60,16 +61,20 @@ body {
   padding: 15px;
   background: #111;
   border-right: 1px solid var(--chrome-border);
+  min-height: 0;
+  overflow: hidden;
 }
 
 .aside-main {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 0;
 }
 
 .aside-main main {
   flex: 1;
+  min-height: 0;
 }
 
 .tips {
@@ -123,11 +128,13 @@ body {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  min-height: 0;
 }
 
 .aside-log ul {
   list-style: none;
-  height: 300px;
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--text-tag) transparent;
@@ -152,6 +159,7 @@ main {
 
 .page_terminal {
   height: 100%;
+  min-height: 0;
 }
 
 .fenetre_terminal {
