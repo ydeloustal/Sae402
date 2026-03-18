@@ -262,9 +262,16 @@ main {
 .wait-dot {
   font-size: 1.05rem;
   line-height: 1;
-  color: #ffffff;
   opacity: 0.12;
   animation: waitBlink 900ms infinite steps(1, end);
+}
+
+.ligne_systeme .wait-dot{
+  color: var(--text-system);
+}
+
+.ligne_narrateur .wait-dot{
+  color: var(--text-narrator);
 }
 
 @keyframes waitBlink {

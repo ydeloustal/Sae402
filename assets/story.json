@@ -3,14 +3,14 @@
   "intro": [
     {
       "type": "system",
-      "text": "Initialisation de la session{{dots:3s}}{{br}}Processus humain detecté dans la console."
+      "text": "Initialisation de la session{{dots:3s}}{{br}}Processus humain detecté dans la console{{dots:3s}}{{br}}Test"
     }
   ],
   "panels": [
     {
       "speaker": "Narrateur",
       "type": "narrator",
-      "text": "L'ecran affiche une seule ligne: 'Ne ferme pas cette fenetre YOAN sinon tu meurt'."
+      "text": "L'ecran affiche une seule ligne:{{dots:1s}}{{br}}\"Ne ferme pas cette fenetre YOAN sinon tu meurt\"."
     },
     {
       "type": "ascii",

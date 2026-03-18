@@ -31,17 +31,8 @@ export async function loadStory() {
 		const panels = Array.isArray(story.panels) ? story.panels : [];
 
 		state.queue = [...intro, ...panels];
-		printLine(`Session ouverte: ${story.title || "Recit sans titre"}`, "system", true);
-		printLine(`Fragments disponibles: ${panels.length}`, "system", true);
-		printLine(`Presets ASCII: ${state.asciiWidths.join(", ")} colonnes`, "system", true);
 		printLine("Commandes: next, help", "system", true);
 		printLine("Tape 'next' puis Entree pour avancer.", "system", true);
-		if (fixedCount > 0) {
-			printLine(`Correction auto JSON: ${fixedCount} antislash(s) ajuste(s).`, "system", true);
-		}
-		if (convertedCount > 0) {
-			printLine(`Correction auto JSON: ${convertedCount} sequence(s) '\\/' preservee(s).`, "system", true);
-		}
 	} catch (error) {
 		printLine("Erreur de chargement du récit JSON.", "system", true);
 		printLine(String(error), "system", true);
