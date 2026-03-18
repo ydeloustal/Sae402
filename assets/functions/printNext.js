@@ -10,6 +10,17 @@ export async function printNext() {
     }
 
     if (state.pointer >= state.queue.length) {
+        if (!state.hasPromptedZoneChoice) {
+            const hasZones = ["a", "b", "c"].some((key) => Array.isArray(state.zones[key]) && state.zones[key].length > 0);
+            if (hasZones) {
+                printLine("Choix de zone disponible: tape A, B ou C pour continuer.", "system", true);
+                state.awaitingZoneChoice = true;
+                state.hasPromptedZoneChoice = true;
+                state.isStoryEnded = false;
+                return;
+            }
+        }
+
         if (!state.hasPrintedEnd) {
             printLine("Fin de transmission.", "system", true);
             state.hasPrintedEnd = true;
@@ -32,6 +43,17 @@ export async function printNext() {
     }
 
     if (state.pointer >= state.queue.length) {
+        if (!state.hasPromptedZoneChoice) {
+            const hasZones = ["a", "b", "c"].some((key) => Array.isArray(state.zones[key]) && state.zones[key].length > 0);
+            if (hasZones) {
+                printLine("Choix de zone disponible: tape A, B ou C pour continuer.", "system", true);
+                state.awaitingZoneChoice = true;
+                state.hasPromptedZoneChoice = true;
+                state.isStoryEnded = false;
+                return;
+            }
+        }
+
         state.isStoryEnded = true;
     }
 }

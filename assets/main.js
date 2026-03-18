@@ -29,7 +29,17 @@ import { initLogsAutoScroll } from "./functions/initLogsAutoScroll.js";
 import { keepTerminalInputFocused } from "./functions/keepTerminalInputFocused.js";
 import { initCommandLogs } from "./functions/logExecutedCommand.js";
 
-const KNOWN_COMMANDS = ["next", "help","ping"];
+const KNOWN_COMMANDS = [
+	"next",
+	"help",
+	"ping",
+	"a",
+	"b",
+	"c",
+	"zonea",
+	"zoneb",
+	"zonec",
+];
 
 
 commandInput.addEventListener("keydown", async (event) => {
