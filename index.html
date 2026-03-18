@@ -7,36 +7,84 @@
     <title>Récit interactif</title>
 </head>
 <body>
-    <header style="grid-column: 1/3;
-    min-height: 60px;
-    background-color: red;">SALUT</header>
-    <aside>
+    <aside class="aside-bar">
         <div class="tips">
-
+            <h2>Aide et indice</h2>
+            <div class="tips-content"></div>
         </div>
-        <div class="lore">
-            
+
+        <div class="acte">
+            <h2>Actes</h2>
+            <button>Acte I</button>
+            <button>Acte II</button>
+            <button>Acte III</button>
+        </div>
+        <div class="aside-log">
+            <h2>Logs</h2>
+            <ul>
+                <li>Log 1</li>
+                <li>Log 2</li>
+                <li>Log 3</li>
+                <li>Log 4</li>
+                <li>Log 5</li>
+                <li>Log 6</li>
+                <li>Log 7</li>
+                <li>Log 8</li>
+                <li>Log 9</li>
+                <li>Log 10</li>
+                <li>Log 11</li>
+                <li>Log 12</li>
+                <li>Log 13</li>
+                <li>Log 14</li>
+                <li>Log 15</li>
+                <li>Log 16</li>
+                <li>Log 17</li>
+                <li>Log 18</li>
+                <li>Log 19</li>
+                <li>Log 20</li>
+            </ul>
         </div>
     </aside>
-    <main>
-        <div class="page_terminal">
-            <section class="fenetre_terminal" aria-label="Terminal narratif">
-                <header class="header_terminal">
-                    <p class="titre_terminal">Terminal numérique inconnu - BD Narrative Host</p>
-                </header>
-
-                <div class="corps_terminal" id="terminalBody" role="log" aria-live="polite">
-                    <label class="ligne ligne_commande" id="inputLine" for="commandInput">
-                        <span class="invite_terminal">PS C:\Users\???\???&gt;</span>
-                        <input id="commandInput" type="text" autocomplete="off" spellcheck="false" placeholder="Tape next puis Entree" />
-                    </label>
-                </div>
-            </section>
-        </div>
-    </main>
-    <footer>
-
-    </footer>
+    <aside class="aside-main">
+        <header>
+            <h1>Void Terminal</h1>
+            <p>Copyright (C) Void Corporation. Tous droits réservés.</p>
+            <p>Installez la dernière version du Terminal pour de nouvelles fonctionnalités et améliorations de sécurité !</p>
+        </header>
+        <main>
+            <div class="page_terminal">
+                <section class="fenetre_terminal" aria-label="Terminal narratif">
+                    <header class="header_terminal">
+                        <p class="titre_terminal">Terminal numérique inconnu - BD Narrative Host</p>
+                    </header>
+                    <div class="corps_terminal" id="terminalBody" role="log" aria-live="polite">
+                        <label class="ligne ligne_commande" id="inputLine" for="commandInput">
+                            <span class="invite_terminal">PS C:\Users\???\???&gt;</span>
+                            <input id="commandInput" type="text" autocomplete="off" spellcheck="false" placeholder="Tape next puis Entree">
+                        </label>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <footer>
+            <p id="footer-text"></p>
+        </footer>
+    </aside>
     <script src="assets/index.js"></script>
+    <script>
+        const text = "Réalisé par SOM DE ARAUJO Charlotte / RICHAND Enzo / VERZELETTI Maxime / DELOUSTAL YOAN / LAURENT Etan";
+        const p = document.getElementById("footer-text");
+        let i = 0;
+
+        function typeWriter() {
+            if (i < text.length) {
+            p.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 40);
+            }
+        }
+
+        window.addEventListener("load", typeWriter);
+    </script>
 </body>
 </html>
