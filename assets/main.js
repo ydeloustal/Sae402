@@ -25,8 +25,10 @@ import { printNext } from "./functions/printNext.js";
 import { printCommandEcho } from "./functions/printCommandEcho.js";
 import { normalizeCommand } from "./functions/normalizeCommand.js";
 import { runCommand } from "./functions/runCommand.js";
+import { initLogsAutoScroll } from "./functions/initLogsAutoScroll.js";
 
 const KNOWN_COMMANDS = ["next", "help","ping"];
+
 
 commandInput.addEventListener("keydown", async (event) => {
 	// ── Flèche haut : commande précédente ──────────────────────────
@@ -104,4 +106,5 @@ commandInput.addEventListener("input", () => {
 });
 
 loadStory();
+initLogsAutoScroll();
 commandInput.focus();
