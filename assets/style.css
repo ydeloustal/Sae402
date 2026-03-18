@@ -9,6 +9,7 @@
   --text-narrator: #d7ba7d;
   --text-character: #f2f2f2;
   --text-tag: #4ec9b0;
+  --text-tag-light: #a6d7ca;
   --chrome-border: #404040;
 }
 
@@ -72,50 +73,7 @@ body {
   color: var(--text-tag);
 }
 
-.tips {
-  display: grid;
-  gap: 10px;
-  background: #0c0c0c;
-  border: 1px solid var(--chrome-border);
-  padding: 12px;
-  border-radius: 6px;
-}
-
-.tips-content {
-  min-height: 80px;
-  background: #151515;
-  border: 1px dashed var(--chrome-border);
-}
-
-.acte {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  background: #0c0c0c;
-  border: 1px solid var(--chrome-border);
-  padding: 12px;
-  border-radius: 6px;
-}
-
-.acte button {
-  background: #111;
-  border: 1px solid var(--chrome-border);
-  color: var(--text-default);
-  padding: 8px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-  border-radius: 5px;
-}
-
-.acte button:hover {
-  background: #1a1a1a;
-  scale: 102%;
-  border: var(--text-tag);
-  box-shadow: 0px 4px 5px var(--text-tag);
-}
-
-.aside-log {
+.aside-help {
   background: #0c0c0c;
   border: 1px solid var(--chrome-border);
   padding: 12px;
@@ -126,7 +84,7 @@ body {
   min-height: 0;
 }
 
-.aside-log ul {
+.aside-help ul {
   list-style: none;
   flex: 1;
   min-height: 0;
@@ -135,25 +93,21 @@ body {
   scrollbar-color: var(--text-tag) transparent;
 }
 
-.aside-log li {
+.aside-help li {
   font-size: 0.88rem;
+  color: var(--text-tag-light);
+  word-break: break-word;
   line-height: 1.4;
   padding: 0.28rem 0;
   border-bottom: 1px dashed #242424;
 }
 
-.aside-log li:last-child {
+.aside-help li::before{
+  content: "- ";
+}
+
+.aside-help li:last-child {
   border-bottom: none;
-}
-
-.log-command {
-  color: #a6d7ca;
-  word-break: break-word;
-}
-
-.log-empty {
-  color: #7d7d7d;
-  font-style: italic;
 }
 
 h2 {

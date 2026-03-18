@@ -27,26 +27,26 @@ export function printLine(text, type = "character", instant = false, options = {
 	} else if (mode === "plain") {
 		line.append(content);
 	} else {
-		const timestamp = document.createElement("span");
-		timestamp.className = "horodatage";
-		timestamp.textContent = getTimestamp();
-
-		const prompt = document.createElement("span");
-		prompt.className = "invite_terminal";
-		prompt.textContent = `PS ${shellPath}>`;
-		line.append(prompt, content);
-		textToPrint = text.replace(`PS ${shellPath}> `, "");
-	}
+    if (type === "system") {
+        // les lignes system en mode prompt s'affichent sans path
+        line.append(content);
+    } else {
+        const prompt = document.createElement("span");
+        prompt.className = "invite_terminal";
+        prompt.textContent = `${state.currentPath}>`;
+        line.append(prompt, content);
+    }
+    textToPrint = text;
+}
 
 	terminalBody.insertBefore(line, inputLine);
 
 	if (instant) {
-		content.textContent = mode === "log" || mode === "plain" ? textToPrint : ` ${textToPrint}`;
+		content.textContent = textToPrint;
 		scrollTerminal();
 		return Promise.resolve();
 	}
 
-	const prefix = mode === "log" || mode === "plain" ? "" : " ";
 	const typing = options.typing || {};
-	return typeWrite(content, `${prefix}${textToPrint}`, typing);
+	return typeWrite(content, textToPrint, typing);
 }

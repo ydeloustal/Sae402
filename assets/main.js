@@ -118,6 +118,8 @@ commandInput.addEventListener("input", () => {
 });
 
 loadStory();
+const promptSpan = document.querySelector("#inputLine .invite_terminal");
+if (promptSpan) promptSpan.textContent = `${state.currentPath}>`;
 initCommandLogs();
 initLogsAutoScroll();
 keepTerminalInputFocused(commandInput);

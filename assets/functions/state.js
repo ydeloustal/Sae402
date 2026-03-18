@@ -23,6 +23,7 @@ export const state = {
     history: [],
     historyPointer: -1,
     commandLogs: [],
+    currentPath: "User",
 };
 
-export const shellPath = "C:\\Users\\???\\???";
+export const shellPath = "User";

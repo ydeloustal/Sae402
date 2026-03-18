@@ -32,9 +32,14 @@ export async function printNext() {
     const entry = state.queue[state.pointer];
     state.pointer += 1;
 
+    if (entry.path) {
+        state.currentPath = entry.path.replace("/", "\\");
+        const promptSpan = document.querySelector("#inputLine .invite_terminal");
+        if (promptSpan) promptSpan.textContent = `${state.currentPath}>`;
+    }
+
     if (entry.type === "ascii") {
         const width = Number(entry.preset || entry.width || 71);
-        printLine(`Show-AsciiArt -Width ${width}`, "character", true, { mode: "prompt" });
         await printAscii(entry);
     } else if (entry.type === "wait") {
         await printWait(entry);

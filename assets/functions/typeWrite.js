@@ -110,7 +110,7 @@ async function showInlineDots(node, durationMs) {
 	scrollTerminal();
 	await sleep(durationMs);
 
-	dots.replaceWith(document.createTextNode("..."));
+	dots.replaceWith(document.createTextNode(" ✓"));
 	scrollTerminal();
 }
 
