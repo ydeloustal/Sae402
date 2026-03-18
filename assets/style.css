@@ -245,6 +245,34 @@ main {
   color: var(--text-character);
 }
 
+.ligne_wait {
+  color: var(--text-system);
+}
+
+.wait-dots {
+  display: inline-flex;
+  gap: 0.12rem;
+  letter-spacing: 0;
+}
+
+.wait-dots-inline {
+  margin: 0 0.05rem;
+}
+
+.wait-dot {
+  font-size: 1.05rem;
+  line-height: 1;
+  color: #ffffff;
+  opacity: 0.12;
+  animation: waitBlink 900ms infinite steps(1, end);
+}
+
+@keyframes waitBlink {
+  0%, 19% { opacity: 0.12; }
+  20%, 45% { opacity: 1; }
+  46%, 100% { opacity: 0.12; }
+}
+
 .invite_terminal {
   color: #f2f2f2;
   font-weight: 700;
