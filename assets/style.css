@@ -40,18 +40,6 @@ body {
   height: 100vh;
 }
 
-/* HEADER */
-
-.aside-main > header {
-  background-color: purple;
-  color: white;
-  font-family:
-    "Roboto Mono", "Cascadia Mono", "Ubuntu Mono", Consolas, "Courier New",
-    monospace;
-  grid-column: 2 / 3;
-  padding: 10px;
-}
-
 /* ASIDE */
 
 .aside-bar {
