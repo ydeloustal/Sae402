@@ -115,9 +115,9 @@ body {
 
 .acte button:hover {
   background: #1a1a1a;
-  scale: 105%;
+  scale: 102%;
   border: var(--text-tag);
-  box-shadow: 0 0 10px var(--text-tag);
+  box-shadow: 0px 4px 5px var(--text-tag);
 }
 
 .aside-log {
