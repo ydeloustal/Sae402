@@ -38,6 +38,11 @@ export async function printNext() {
         if (promptSpan) promptSpan.textContent = `${state.currentPath}>`;
     }
 
+    if (entry.checkpoint) {
+        state.lastCheckpoint = state.pointer - 1;
+        state.checkpointQueue = [...state.queue];
+    }
+
     if (entry.type === "ascii") {
         const width = Number(entry.preset || entry.width || 71);
         await printAscii(entry);

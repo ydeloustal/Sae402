@@ -12,7 +12,9 @@ setPrintNext(printNext);
 const KNOWN_COMMANDS = [
 	"next",
 	"help",
+	"hint",
 	"ping",
+	"back",
 	"a",
 	"b",
 	"c",

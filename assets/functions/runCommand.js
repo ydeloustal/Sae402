@@ -84,6 +84,23 @@ export async function runCommand(rawCommand) {
 		return;
 	}
 
+	if (command === "back") {
+		if (state.lastCheckpoint <= 0 && !state.checkpointQueue) {
+			printLine("Impossible de revenir en arrière.", "system", true);
+			return;
+		}
+		if (state.checkpointQueue) {
+			state.queue = state.checkpointQueue;
+		}
+		state.pointer = state.lastCheckpoint;
+		state.isStoryEnded = false;
+		state.hasPrintedEnd = false;
+		state.hasPromptedZoneChoice = false;
+		state.awaitingZoneChoice = false;
+		await printNext();
+		return;
+	}
+
 	printLine(`Commande inconnue: ${command}`, "system", true);
 	printLine("Tape 'help' pour voir les commandes.", "system", true);
 }

@@ -9,7 +9,7 @@ export async function printAscii(entry) {
 		extraClass: "ligne_ascii",
 		typing: {
 			intervalMs: 1,
-			charsPerTick: 10,
+			charsPerTick: 100,
 		},
 	});
 }
