@@ -47,6 +47,10 @@ export async function printNext() {
         await printLine(formatLine(entry), entry.type || "character", false, { mode: "prompt" });
     }
 
+    if (entry.autonext) {
+        await printNext();
+    }
+
     if (state.pointer >= state.queue.length) {
         if (!state.hasPromptedZoneChoice) {
             const hasZones = ["a", "b", "c"].some((key) => Array.isArray(state.zones[key]) && state.zones[key].length > 0);

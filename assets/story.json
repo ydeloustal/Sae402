@@ -5,8 +5,33 @@
       "type": "system",
       "mode": "plain",
       "path": "Test/test1",
-      "text": "Initialisation de la session{{dots:1s}}{{br}}Processus humain detecté dans la console{{dots:1s}}{{next}}"
+      "text": "Initialisation de la session{{dots:1s}}{{next}}"
       
+    },
+    {
+      "type":"ascii",
+      "preset":83,
+      "path": "",
+      "label":"Booting",
+      "autonext": true,
+      "ascii":[
+        "Arch Linux 5.13.12-arch1-1 (tty1)",
+        "",
+        "MMI3 login: root",
+        "Password: *******",
+        "Last login: Sat Aug 21 09:31:19 on tty1",
+        "[root@MMI3 ˜]# neofetch",
+        "",
+        "             @@@@@@@@@@@@@\\               root@GT610",
+        "             ````````````@@               ----------",
+        "             @@ #######\\ @@               Consignes : Dans cette aventure, résolvez des enigmes,",
+        "             @@ ######## @@               tout se fera au clavier et des textes bla bla bla lorem",
+        "             @@ ##ASC### @@               ipsum dolor si amet refaire la consigne svp je sais pas",
+        "             @@ ######## @@               ecrire",
+        "             @@ \\####### @@               Tips : lorem ipsum dolor si amet refaire la consigne",
+        "             @@,,,,,,,,, @@               svp je sais pas ecrire, lorem ipsum dolor sit amet et",
+        "             \\@@@@@@@@@@ @@               tout la c'est trop bien le lorem"
+      ]
     }
   ],
   "panels": [
@@ -16,7 +41,6 @@
       "path": "Test/test3",
       "label":"Arrivé dans le monde",
       "ascii":[
-        "",
         "+---------------------------------------------------------------------------------+",
         "|01 01 1 10 10 10010 01   001  000 11 00  10'           '1 010 10 10 0101 01  0101|",
         "|11   0 01 01 10 0 0 0 11 1 1 01'                            '1001  01 1 0  11  10|",
