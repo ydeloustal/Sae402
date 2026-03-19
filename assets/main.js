@@ -1,33 +1,13 @@
 import { state, commandInput } from "./functions/state.js";
-import { isHexDigit } from "./functions/isHexDigit.js";
-import { isValidJsonEscape } from "./functions/isValidJsonEscape.js";
-import { sanitizeJsonBackslashes } from "./functions/sanitizeJsonBackslashes.js";
-import { preserveEscapedForwardSlash } from "./functions/preserveEscapedForwardSlash.js";
-import { parseStoryJsonWithTolerance } from "./functions/parseStoryJsonWithTolerance.js";
-import { skipWhitespace } from "./functions/skipWhitespace.js";
-import { decodeLiteralAsciiString } from "./functions/decodeLiteralAsciiString.js";
-import { readLiteralJsonString } from "./functions/readLiteralJsonString.js";
-import { extractAsciiArraysFromSource } from "./functions/extractAsciiArraysFromSource.js";
-import { restoreLiteralAsciiArrays } from "./functions/restoreLiteralAsciiArrays.js";
-import { loadStory } from "./functions/loadStory.js";
-import { formatLine } from "./functions/formatLine.js";
-import { getTimestamp } from "./functions/getTimestamp.js";
-import { printLine } from "./functions/printLine.js";
-import { typeWrite } from "./functions/typeWrite.js";
-import { normalizeAsciiLines } from "./functions/normalizeAsciiLines.js";
-import { normalizeAsciiGlyphs } from "./functions/normalizeAsciiGlyphs.js";
-import { fitAsciiLines } from "./functions/fitAsciiLines.js";
-import { buildAsciiPreset } from "./functions/buildAsciiPreset.js";
-import { resolveAsciiEntry } from "./functions/resolveAsciiEntry.js";
-import { printAscii } from "./functions/printAscii.js";
-import { scrollTerminal } from "./functions/scrollTerminal.js";
-import { printNext } from "./functions/printNext.js";
-import { printCommandEcho } from "./functions/printCommandEcho.js";
-import { normalizeCommand } from "./functions/normalizeCommand.js";
+import { printLine, setPrintNext } from "./functions/printLine.js";
 import { runCommand } from "./functions/runCommand.js";
+import { loadStory } from "./functions/loadStory.js";
+import { printNext } from "./functions/printNext.js";
 import { initLogsAutoScroll } from "./functions/initLogsAutoScroll.js";
 import { keepTerminalInputFocused } from "./functions/keepTerminalInputFocused.js";
 import { initCommandLogs } from "./functions/logExecutedCommand.js";
+
+setPrintNext(printNext);
 
 const KNOWN_COMMANDS = [
 	"next",

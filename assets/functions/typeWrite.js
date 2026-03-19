@@ -1,7 +1,7 @@
 import { state, commandInput } from "./state.js";
 import { scrollTerminal } from "./scrollTerminal.js";
 
-const INLINE_MARKER_PATTERN = /\{\{\s*(dots(?::\s*([^}]+))?|br|nl|newline)\s*\}\}/gi;
+const INLINE_MARKER_PATTERN = /\{\{\s*(dots(?::\s*([^}]+))?|br|nl|newline|next)\s*\}\}/gi;
 const DEFAULT_WAIT_MS = 1200;
 const MIN_WAIT_MS = 100;
 
@@ -57,6 +57,8 @@ function splitInlineTokens(text) {
 				type: "dots",
 				durationMs: parseWaitDuration(match[2]),
 			});
+		} else if (marker === "next") {
+			parts.push({ type: "next" });
 		} else {
 			parts.push({ type: "lineBreak" });
 		}
@@ -122,6 +124,7 @@ function insertInlineLineBreak(node) {
 export async function typeWrite(node, text, typing = {}) {
 	const intervalMs = Number.isFinite(typing.intervalMs) ? Math.max(1, typing.intervalMs) : 16;
 	const charsPerTick = Number.isFinite(typing.charsPerTick) ? Math.max(1, Math.floor(typing.charsPerTick)) : 1;
+	const onNext = typing.onNext || null;
 
 	state.isTyping = true;
 	commandInput.disabled = true;
@@ -133,6 +136,10 @@ export async function typeWrite(node, text, typing = {}) {
 				await showInlineDots(node, chunk.durationMs);
 			} else if (chunk.type === "lineBreak") {
 				insertInlineLineBreak(node);
+			} else if (chunk.type === "next") {
+				state.isTyping = false;
+				if (typing.onNext) await typing.onNext();
+				state.isTyping = true;
 			} else {
 				await typeChunk(node, chunk.value, charsPerTick, intervalMs);
 			}

@@ -3,6 +3,12 @@ import { getTimestamp } from "./getTimestamp.js";
 import { typeWrite } from "./typeWrite.js";
 import { scrollTerminal } from "./scrollTerminal.js";
 
+let _printNext = null;
+
+export function setPrintNext(fn) {
+    _printNext = fn;
+}
+
 export function printLine(text, type = "character", instant = false, options = { mode: "log" }) {
 	const line = document.createElement("p");
 	line.className = `ligne ${classeParType[type] || "ligne_perso"}`;
@@ -48,5 +54,5 @@ export function printLine(text, type = "character", instant = false, options = {
 	}
 
 	const typing = options.typing || {};
-	return typeWrite(content, textToPrint, typing);
+	return typeWrite(content, textToPrint, { ...typing, onNext: _printNext });
 }
