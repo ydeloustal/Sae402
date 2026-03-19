@@ -132,6 +132,15 @@ main {
 .page_terminal {
   height: 100%;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.fenetre_terminal {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 /* TERMINAL */
@@ -144,20 +153,6 @@ main {
   gap: 5px;
 }
 
-.onglet {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.croix {
-  color: #7d7d7d;
-  font-size: 2rem;
-  line-height: 1;
-  cursor: pointer;
-  align-self: center;
-}
-
 .titre_terminal {
   font-size: 0.95rem;
   font-weight: 700;
@@ -166,6 +161,7 @@ main {
 
 .corps_terminal {
   flex: 1;
+  min-height: 0;
   background: var(--screen-bg);
   padding: 1rem;
   overflow-y: auto;
