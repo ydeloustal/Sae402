@@ -23,7 +23,9 @@ export const state = {
     history: [],
     historyPointer: -1,
     commandLogs: [],
-    currentPath: "User",
+    currentPath: "",
+    lastCheckpoint: 0,
+    checkpointQueue: null,
 };
 
-export const shellPath = "User";
+export const shellPath = "";

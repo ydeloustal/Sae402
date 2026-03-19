@@ -4,7 +4,7 @@
     {
       "type": "system",
       "mode": "plain",
-      "path": "Test/test1",
+      "path": "",
       "text": "Initialisation de la session{{dots:1s}}{{next}}"
       
     },
@@ -15,6 +15,7 @@
       "label":"Booting",
       "autonext": true,
       "ascii":[
+        "",
         "Arch Linux 5.13.12-arch1-1 (tty1)",
         "",
         "MMI3 login: root",
@@ -30,7 +31,8 @@
         "             @@ ######## @@               ecrire",
         "             @@ \\####### @@               Tips : lorem ipsum dolor si amet refaire la consigne",
         "             @@,,,,,,,,, @@               svp je sais pas ecrire, lorem ipsum dolor sit amet et",
-        "             \\@@@@@@@@@@ @@               tout la c'est trop bien le lorem"
+        "             \\@@@@@@@@@@ @@               tout la c'est trop bien le lorem",
+        ""
       ]
     }
   ],
@@ -38,7 +40,7 @@
     {
       "type":"ascii",
       "preset":83,
-      "path": "Test/test3",
+      "path": "?/User",
       "label":"Arrivé dans le monde",
       "ascii":[
         "+---------------------------------------------------------------------------------+",
@@ -65,13 +67,6 @@
         "|          .                .                      .                  .           |",
         "+---------------------------------------------------------------------------------+"
       ]
-    },
-    {
-      "type": "system",
-      "mode": "plain",
-      "path": "Test/test1",
-      "text": "Initialisation de la session{{dots:1s}}{{next}}"
-      
     },
     {
       "type":"ascii",
@@ -117,14 +112,14 @@
 "|0 1 01 1 01 1 010 0'                                                    '10 10 0 |",
 "|0   11   11'                                                                   '0|",
 "|1 10'                                                                            |",
-"|                                *                                                |",
-"|                             \\                                                   |",
-"|                                   *                                             |",
-"|                            *   &                                                |",
-"|                          _    ├░▐    -                                          |",
-"|                                +.   *                                           |",
 "|                                                                                 |",
-"|                              *     \\              je devrais aller explorer     |",
+"|                                                                                 |",
+"|                                                                                 |",
+"|                                                                                 |",
+"|                                X                                                |",
+"|                                                                                 |",
+"|                                                                                 |",
+"|                                                   je devrais aller explorer     |",
 "|                                                        /                        |",
 "|                                                                                 |",
 "|                                                      Θ                          |",
@@ -139,6 +134,8 @@
       "type":"ascii",
       "preset":83,
       "label":"Arrivé dans le monde",
+      "checkpoint": true,
+      "autonext": true,
       "ascii":[
         "",
        "+---------------------------------------------------------------------------------+",
