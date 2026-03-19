@@ -21,15 +21,12 @@ const KNOWN_COMMANDS = new Set([
 	"hint",
 ]);
 
-function resolveZoneKey(command) {
-    if (command === "a" || command === "zonea" || command === "zone a" || command === "1") return "a";
-    if (command === "b" || command === "zoneb" || command === "zone b" || command === "2") return "b";
-    if (command === "c" || command === "zonec" || command === "zone c" || command === "3") return "c";
-    return null;
+function resolveZoneKey(command, zones) {
+    const keys = Object.keys(zones);
+    const index = parseInt(command) - 1;
+    if (!isNaN(index) && index >= 0 && index < keys.length) return keys[index];
+    return keys.find(k => command === k || command === `zone${k}` || command === `zone ${k}`) || null;
 }
-
-// Dans le bloc awaitingZoneChoice :
-const zoneEntries = zoneKey ? state.zones[zoneKey]?.panels : null;
 
 export async function runCommand(rawCommand) {
 	const command = normalizeCommand(rawCommand);
@@ -45,8 +42,8 @@ export async function runCommand(rawCommand) {
 	});
 
 	if (state.awaitingZoneChoice) {
-		const zoneKey = resolveZoneKey(command);
-		const zoneEntries = zoneKey ? state.zones[zoneKey] : null;
+		const zoneKey = resolveZoneKey(command, state.zones);
+		const zoneEntries = zoneKey ? state.zones[zoneKey]?.panels : null;
 
 		if (!zoneKey || !Array.isArray(zoneEntries) || zoneEntries.length === 0) {
 			printLine("Choix invalide. Tape A, B ou C.", "system", true);
@@ -54,6 +51,7 @@ export async function runCommand(rawCommand) {
 		}
 
 		state.awaitingZoneChoice = false;
+		state.cheminIndex = zoneKey;
 		state.queue = [...zoneEntries];
 		state.pointer = 0;
 		state.hasPrintedEnd = false;

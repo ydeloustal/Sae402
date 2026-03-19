@@ -2,6 +2,7 @@ import { state, commandInput } from "./state.js";
 import { parseStoryJsonWithTolerance } from "./parseStoryJsonWithTolerance.js";
 import { restoreLiteralAsciiArrays } from "./restoreLiteralAsciiArrays.js";
 import { printLine } from "./printLine.js";
+import { loadActe } from "./loadActe.js";
 
 export async function loadStory() {
 	try {
@@ -27,19 +28,17 @@ export async function loadStory() {
 		const storyText = await storyResponse.text();
 		const { story, fixedCount, convertedCount } = parseStoryJsonWithTolerance(storyText);
 		restoreLiteralAsciiArrays(story, storyText);
+
 		const intro = Array.isArray(story.intro) ? story.intro : [];
-		const panels = Array.isArray(story.panels) ? story.panels : [];
-		
-		const zones = {};
-		if (story.zones && typeof story.zones === "object") {
-			for (const [key, value] of Object.entries(story.zones)) {
-				zones[key] = {
-					label: value.label || key.toUpperCase(),
-					panels: Array.isArray(value.panels) ? value.panels : [],
-				};
-			}
+		state.actes = Array.isArray(story.actes) ? story.actes : [];
+
+		if (state.actes.length > 0) {
+			loadActe(0);
+			state.queue = [...intro, ...state.queue];
+		} else {
+			const panels = Array.isArray(story.panels) ? story.panels : [];
+			state.queue = [...intro, ...panels];
 		}
-		state.zones = zones;
 
 		printLine("Commandes: next, help", "system", true);
 		printLine("Tape 'next' puis Entree pour avancer.", "system", true);

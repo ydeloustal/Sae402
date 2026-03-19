@@ -27,6 +27,10 @@ export const state = {
     lastCheckpoint: 0,
     checkpointQueue: null,
     currentHintIndex: 1,
+    actes: [],
+    acteIndex: 0,
+    cheminIndex: null,
+    cheminsDone: [],
 };
 
 export const shellPath = "";
