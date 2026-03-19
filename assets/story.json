@@ -173,7 +173,9 @@
     {
       "type": "ascii",
       "preset": 81,
-      "hint": "blabla",
+      "hint1": "premier indice",
+      "hint2": "deuxième indice",
+      "hint3": "troisième indice",
       "label": "Image utilisateur 81 colonnes",
       "ascii": [
         "",

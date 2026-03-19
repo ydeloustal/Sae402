@@ -102,6 +102,18 @@ export async function runCommand(rawCommand) {
 		return;
 	}
 
+	if (command === "hint") {
+    const hint = state.currentHints[state.currentHintIndex];
+    if (!hint) {
+        printLine("Aucun indice disponible.", "system", true);
+        return;
+    }
+    const total = Object.keys(state.currentHints).length;
+	printLine(`Indice ${state.currentHintIndex}/${total}: ${hint}`, "system", true);
+    state.currentHintIndex += 1;
+    return;
+}
+
 	printLine(`Commande inconnue: ${command}`, "system", true);
 	printLine("Tape 'help' pour voir les commandes.", "system", true);
 }

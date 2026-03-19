@@ -43,6 +43,17 @@ export async function printNext() {
         state.checkpointQueue = [...state.queue];
     }
 
+    const hints = {};
+    let hintIndex = 1;
+    while (entry[`hint${hintIndex}`] !== undefined) {
+        hints[hintIndex] = entry[`hint${hintIndex}`];
+        hintIndex += 1;
+    }
+    if (hintIndex > 1) {
+    state.currentHints = hints;
+    state.currentHintIndex = 1;
+}
+
     if (entry.type === "ascii") {
         const width = Number(entry.preset || entry.width || 71);
         await printAscii(entry);
