@@ -18,6 +18,7 @@ const KNOWN_COMMANDS = new Set([
 	"zone a",
 	"zone b",
 	"zone c",
+	"hint",
 ]);
 
 function resolveZoneKey(command) {

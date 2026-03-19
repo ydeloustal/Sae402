@@ -19,6 +19,7 @@ const KNOWN_COMMANDS = [
 	"zonea",
 	"zoneb",
 	"zonec",
+	"hint",
 ];
 
 
