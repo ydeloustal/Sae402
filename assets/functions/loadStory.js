@@ -29,16 +29,18 @@ export async function loadStory() {
 		restoreLiteralAsciiArrays(story, storyText);
 		const intro = Array.isArray(story.intro) ? story.intro : [];
 		const panels = Array.isArray(story.panels) ? story.panels : [];
-		const zoneA = Array.isArray(story.ZoneA) ? story.ZoneA : [];
-		const zoneB = Array.isArray(story.ZoneB) ? story.ZoneB : [];
-		const zoneC = Array.isArray(story.ZoneC) ? story.ZoneC : [];
+		
+		const zones = {};
+		if (story.zones && typeof story.zones === "object") {
+			for (const [key, value] of Object.entries(story.zones)) {
+				zones[key] = {
+					label: value.label || key.toUpperCase(),
+					panels: Array.isArray(value.panels) ? value.panels : [],
+				};
+			}
+		}
+		state.zones = zones;
 
-		state.queue = [...intro, ...panels];
-		state.zones = {
-			a: zoneA,
-			b: zoneB,
-			c: zoneC,
-		};
 		printLine("Commandes: next, help", "system", true);
 		printLine("Tape 'next' puis Entree pour avancer.", "system", true);
 	} catch (error) {

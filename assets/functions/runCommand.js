@@ -22,11 +22,14 @@ const KNOWN_COMMANDS = new Set([
 ]);
 
 function resolveZoneKey(command) {
-	if (command === "a" || command === "zonea" || command === "zone a") return "a";
-	if (command === "b" || command === "zoneb" || command === "zone b") return "b";
-	if (command === "c" || command === "zonec" || command === "zone c") return "c";
-	return null;
+    if (command === "a" || command === "zonea" || command === "zone a" || command === "1") return "a";
+    if (command === "b" || command === "zoneb" || command === "zone b" || command === "2") return "b";
+    if (command === "c" || command === "zonec" || command === "zone c" || command === "3") return "c";
+    return null;
 }
+
+// Dans le bloc awaitingZoneChoice :
+const zoneEntries = zoneKey ? state.zones[zoneKey]?.panels : null;
 
 export async function runCommand(rawCommand) {
 	const command = normalizeCommand(rawCommand);
