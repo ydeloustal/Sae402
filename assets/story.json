@@ -173,6 +173,7 @@
     {
       "type": "ascii",
       "preset": 81,
+      "hint": "blabla",
       "label": "Image utilisateur 81 colonnes",
       "ascii": [
         "",
@@ -205,6 +206,7 @@
     {
       "type": "ascii",
       "preset": 81,
+      "hint": "blabla",
       "label": "Image utilisateur 81 colonnes",
       "ascii": [
         "",
@@ -240,6 +242,7 @@
     {
       "type": "ascii",
       "preset": 81,
+      "hint": "une note de musique, un outils qui coupe du bois, se qui délimite végétalement un terrain.",
       "label": "Image utilisateur 81 colonnes",
       "ascii": [
         "",
