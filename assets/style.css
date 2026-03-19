@@ -1,16 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap");
 
 :root {
-  --desktop-bg: #1e1e1e;
-  --window-bg: #000000;
   --screen-bg: #000000;
-  --text-default: #f2f2f2;
-  --text-system: #9cdcfe;
-  --text-narrator: #d7ba7d;
-  --text-character: #f2f2f2;
-  --text-tag: #4ec9b0;
-  --text-tag-light: #a6d7ca;
-  --chrome-border: #404040;
+  --text-default: #ffffff;
+  --text-system: #6eccff;
+  --text-narrator: #ffcc5f;
+  --text-tag: #00ffcc;
+  --chrome-border: #00ffcc;
 }
 
 * {
@@ -93,30 +89,36 @@ body {
   scrollbar-color: var(--text-tag) transparent;
 }
 
-.aside-help li {
+.aside-help ul li {
   font-size: 0.88rem;
-  color: var(--text-tag-light);
+  color: var(--text-system);
   word-break: break-word;
   line-height: 1.4;
   padding: 0.28rem 0;
   border-bottom: 1px dashed #242424;
 }
 
-.aside-help li::before{
+.aside-help ul li span {
+  display: block;
+  font-size: 0.82rem;
+  color: #ffffff;
+  margin-top: 0.12rem;
+}
+
+.aside-help ul li::before{
   content: "- ";
 }
 
-.aside-help li:last-child {
+.aside-help ul li:last-child {
   border-bottom: none;
 }
 
 h2 {
-  grid-column: 1 / -1;
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-tag);
-  margin: 0 0 5px 0;
   text-align: center;
+  
 }
 
 /* MAIN */
@@ -132,20 +134,28 @@ main {
   min-height: 0;
 }
 
-.fenetre_terminal {
-  width: 100%;
-  height: 100%;
-  background: var(--window-bg);
-  display: flex;
-  flex-direction: column;
-}
-
 /* TERMINAL */
 
 .header_terminal {
   background: linear-gradient(180deg, #04070f, #01040a);
   border-bottom: 1px solid #0a1320;
   padding: 0.55rem 0.9rem;
+  display: flex;
+  gap: 5px;
+}
+
+.onglet {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.croix {
+  color: #7d7d7d;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  align-self: center;
 }
 
 .titre_terminal {
@@ -191,7 +201,7 @@ main {
 }
 
 .ligne_perso {
-  color: var(--text-character);
+  color: var(--text-default);
 }
 
 .ligne_wait {
@@ -236,7 +246,7 @@ main {
 }
 
 .horodatage {
-  color: #858585;
+  color: #aaaaaa;
   margin-right: 0.6rem;
 }
 
@@ -273,7 +283,7 @@ footer {
 }
 
 footer p {
-  color: #7d7d7d;
+  color: #ffffff;
   font-size: 0.85rem;
   text-align: center;
   padding: 15px;
