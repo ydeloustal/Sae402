@@ -75,7 +75,7 @@ commandInput.addEventListener("keydown", async (event) => {
 	// ── Entrée : exécution ────────────────────────────────────────
 	if (event.key === "Enter") {
 		event.preventDefault();
-		if (state.isTyping) return;
+		if (state.isTyping && !state.guessWordActive) return;
 
 		const raw = commandInput.value;
 		commandInput.value = "";

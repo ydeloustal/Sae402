@@ -145,8 +145,10 @@ export function startTypingChallenge(entry, onSuccess) {
             }
         }
 
-        // Mot validé avec espace
-        if (typed.endsWith(" ")) {
+        const isLastWord = currentWordIndex === words.length - 1;
+        const isComplete = typed.trim() === expectedWord && (typed.endsWith(" ") || isLastWord && typed.trim().length === expectedWord.length);
+
+        if (typed.endsWith(" ") || (isLastWord && typed.trim() === expectedWord)) {
             const typedWord = typed.trim();
             if (typedWord === expectedWord) {
                 wordsEl.querySelector(`[data-wi="${currentWordIndex}"]`).classList.add("done");
@@ -160,7 +162,6 @@ export function startTypingChallenge(entry, onSuccess) {
                     getLetter(currentWordIndex, 0)?.classList.add("current");
                 }
             } else {
-                // Mot incorrect, reset le mot
                 input.value = "";
                 for (let li = 0; li < expectedWord.length; li++) {
                     const span = getLetter(currentWordIndex, li);

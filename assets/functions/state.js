@@ -30,6 +30,10 @@ export const state = {
     acteIndex: 0,
     cheminIndex: null,
     cheminsDone: [],
+    guessWordActive: false,
+    guessWordCallback: null,
+    guessWordAnswers: [],
+    guessWordFoundIndexes: [],
 };
 
 export const shellPath = "";

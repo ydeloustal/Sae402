@@ -1,4 +1,4 @@
-import { state } from "./state.js";
+import { state, commandInput } from "./state.js";
 import { normalizeCommand } from "./normalizeCommand.js";
 import { printCommandEcho } from "./printCommandEcho.js";
 import { printLine } from "./printLine.js";
@@ -12,87 +12,125 @@ function resolveZoneKey(command, zones) {
 }
 
 export async function runCommand(rawCommand) {
-	const command = normalizeCommand(rawCommand);
+    const command = normalizeCommand(rawCommand);
 
-	if (!command) {
-		return;
-	}
+    if (!command) return;
 
-	printCommandEcho(command);
+    if (state.guessWordActive) {
+		const typed = command.trim().toLowerCase();
 
-	if (state.awaitingZoneChoice) {
-		const zoneKey = resolveZoneKey(command, state.zones);
-		const zoneEntries = zoneKey ? state.zones[zoneKey]?.panels : null;
-
-		if (!zoneKey || !Array.isArray(zoneEntries) || zoneEntries.length === 0) {
-			printLine("Choix invalide. Tape 1 ou 2.", "system", true);
+		if (typed === "hint") {
+			const hint = state.currentHints[state.currentHintIndex];
+			if (!hint) {
+				printLine("Aucun indice disponible.", "system", true);
+				return;
+			}
+			const total = Object.keys(state.currentHints).length;
+			printLine(`Indice ${state.currentHintIndex}/${total}: ${hint}`, "system", true);
+			state.currentHintIndex += 1;
 			return;
 		}
 
-		state.awaitingZoneChoice = false;
-		state.cheminIndex = zoneKey;
-		state.queue = [...zoneEntries];
-		state.pointer = 0;
-		state.hasPrintedEnd = false;
-		state.isStoryEnded = false;
-		state.hasPromptedZoneChoice = true;
+		const matchIndex = state.guessWordAnswers.findIndex(
+			(a, i) => a === typed && !state.guessWordFoundIndexes.includes(i)
+		);
 
-		printLine(`Acces a la zone ${zoneKey.toUpperCase()}...`, "system", true);
-		await printNext();
-		return;
-	}
+		if (matchIndex !== -1) {
+			state.guessWordFoundIndexes.push(matchIndex);
+			const remaining = state.guessWordAnswers.length - state.guessWordFoundIndexes.length;
 
-	if (command === "next") {
-		if (state.isStoryEnded) {
-			printLine("Le recit est termine. Modifie story.json pour continuer.", "system", true);
-			return;
+			if (remaining <= 0) {
+				state.guessWordActive = false;
+				state.isTyping = false;
+				commandInput.placeholder = "";
+				printLine("Bonne réponse !", "system", true);
+				const cb = state.guessWordCallback;
+				state.guessWordCallback = null;
+				cb();
+			} else {
+				commandInput.placeholder = `${remaining} mot(s) restant(s)...`;
+				printLine(`Mot trouvé ! Il en reste ${remaining}.`, "system", true);
+			}
+		} else {
+			printLine("Mauvaise réponse, réessayez.", "system", true);
 		}
-
-		await printNext();
 		return;
 	}
 
-	if (command === "help") {
-		printLine("Commandes disponibles:", "system", true);
-		printLine("- next : affiche la ligne suivante du recit", "system", true);
-		printLine("- help : affiche cette aide", "system", true);
-		return;
-	}
+    printCommandEcho(command);
 
-	if (command === "ping") {
-		printLine("pong", "character", true);
-		return;
-	}
+    if (state.awaitingZoneChoice) {
+        const zoneKey = resolveZoneKey(command, state.zones);
+        const zoneEntries = zoneKey ? state.zones[zoneKey]?.panels : null;
 
-	if (command === "back") {
-		if (state.lastCheckpoint <= 0 && !state.checkpointQueue) {
-			printLine("Impossible de revenir en arrière.", "system", true);
-			return;
-		}
-		if (state.checkpointQueue) {
-			state.queue = state.checkpointQueue;
-		}
-		state.pointer = state.lastCheckpoint;
-		state.isStoryEnded = false;
-		state.hasPrintedEnd = false;
-		state.hasPromptedZoneChoice = false;
-		state.awaitingZoneChoice = false;
-		await printNext();
-		return;
-	}
+        if (!zoneKey || !Array.isArray(zoneEntries) || zoneEntries.length === 0) {
+            printLine("Choix invalide. Tape 1 ou 2.", "system", true);
+            return;
+        }
 
-	if (command === "hint") {
-    const hint = state.currentHints[state.currentHintIndex];
-    if (!hint) {
-        printLine("Aucun indice disponible.", "system", true);
+        state.awaitingZoneChoice = false;
+        state.cheminIndex = zoneKey;
+        state.queue = [...zoneEntries];
+        state.pointer = 0;
+        state.hasPrintedEnd = false;
+        state.isStoryEnded = false;
+        state.hasPromptedZoneChoice = true;
+
+        printLine(`Acces a la zone ${zoneKey.toUpperCase()}...`, "system", true);
+        await printNext();
         return;
     }
-    const total = Object.keys(state.currentHints).length;
-	printLine(`Indice ${state.currentHintIndex}/${total}: ${hint}`, "system", true);
-    state.currentHintIndex += 1;
-    return;
-}
 
-	printLine(`Commande inconnue: ${command}`, "system", true);
-	printLine("Tape 'help' pour voir les commandes.", "system", true);
+    if (command === "next") {
+        if (state.isStoryEnded) {
+            printLine("Le recit est termine. Modifie story.json pour continuer.", "system", true);
+            return;
+        }
+        await printNext();
+        return;
+    }
+
+    if (command === "help") {
+        printLine("Commandes disponibles:", "system", true);
+        printLine("- next : affiche la ligne suivante du recit", "system", true);
+        printLine("- help : affiche cette aide", "system", true);
+        return;
+    }
+
+    if (command === "ping") {
+        printLine("pong", "character", true);
+        return;
+    }
+
+    if (command === "back") {
+        if (state.lastCheckpoint <= 0 && !state.checkpointQueue) {
+            printLine("Impossible de revenir en arrière.", "system", true);
+            return;
+        }
+        if (state.checkpointQueue) {
+            state.queue = state.checkpointQueue;
+        }
+        state.pointer = state.lastCheckpoint;
+        state.isStoryEnded = false;
+        state.hasPrintedEnd = false;
+        state.hasPromptedZoneChoice = false;
+        state.awaitingZoneChoice = false;
+        await printNext();
+        return;
+    }
+
+    if (command === "hint") {
+        const hint = state.currentHints[state.currentHintIndex];
+        if (!hint) {
+            printLine("Aucun indice disponible.", "system", true);
+            return;
+        }
+        const total = Object.keys(state.currentHints).length;
+        printLine(`Indice ${state.currentHintIndex}/${total}: ${hint}`, "system", true);
+        state.currentHintIndex += 1;
+        return;
+    }
+
+    printLine(`Commande inconnue: ${command}`, "system", true);
+    printLine("Tape 'help' pour voir les commandes.", "system", true);
 }

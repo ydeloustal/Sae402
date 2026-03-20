@@ -105,9 +105,8 @@ export async function printNext() {
             startTypingChallenge(entry, resolve);
         });
     } else if (entry.type === "guess-word") {
-        await new Promise((resolve) => {
-            startGuessWord(entry, resolve);
-        });
+        startGuessWord(entry, () => printNext());
+        return;
     } else {
         await printLine(formatLine(entry), entry.type || "character", false, { mode: "prompt" });
     }
