@@ -58,7 +58,7 @@
         {
           "type": "ascii",
           "path": "?/User",
-          "label": "Arrivé dans le monde",
+          "label": "",
           "ascii": [
             "┌─────────────────────────────────────────────────────────────────────────────────┐",
             "│01 01 1 10 10 10010 01   001  000 11 00  10'           '1 010 10 10 0101 01  0101│",
@@ -87,7 +87,7 @@
         },
         {
           "type": "ascii",
-          "label": "Arrivé dans le monde",
+          "label": " ",
           "hint1": "premier indice",
           "hint2": "deuxième indice",
           "hint3": "troisième indice",
@@ -121,7 +121,7 @@
         {
           "type": "ascii",
           "preset": 83,
-          "label": "Questionnement",
+          "label": " ",
           "hint1": "premier indice",
           "hint2": "deuxième indice",
           "hint3": "troisième indice",
@@ -154,7 +154,7 @@
         },
         {
           "type": "ascii",
-          "label": "Arrivé dans le monde",
+          "label": " ",
           "ascii": [
             "",
             "+---------------------------------------------------------------------------------+",
@@ -185,7 +185,7 @@
         {
           "type": "ascii",
           "preset": 83,
-          "label": "Arrivé dans le monde",
+          "label": " ",
           "ascii": [
             "",
             "+---------------------------------------------------------------------------------+",
@@ -215,7 +215,7 @@
         },
         {
           "type": "ascii",
-          "label": "Arrivé dans le monde",
+          "label": "Choix de Routes",
           "checkpoint": true,
           "autonext": true,
           "ascii": [
@@ -261,7 +261,7 @@
               "hint1": "premier indice",
               "hint2": "deuxième indice",
               "hint3": "troisième indice",
-              "label": "Livre Lorem",
+              "label": "Le livre",
               "ascii": [
                 "",
                 "+---------------------------------------------------------------------------------+",
@@ -295,7 +295,7 @@
               "hint1": "premier indice",
               "hint2": "deuxième indice",
               "hint3": "troisième indice",
-              "label": "Livre Lorem Reflexion",
+              "label": " ",
               "ascii": [
                 "",
                 "+---------------------------------------------------------------------------------+",
@@ -329,7 +329,7 @@
               "hint1": "premier indice",
               "hint2": "deuxième indice",
               "hint3": "troisième indice",
-              "label": "Livre Lorem Epreuve",
+              "label": "L'épreuve du livre",
               "ascii": [
                 "",
                 "+---------------------------------------------------------------------------------+",
@@ -362,7 +362,6 @@
               "words": 20,
               "time": 60
             }
-          
           ]
         },
         {
@@ -404,7 +403,7 @@
                 "type": "ascii",
                 "preset": 81,
                 "hint1": "blabla",
-                "label": "Miroir",
+                "label": "Le liroir",
                 "ascii": [
                   "",
                   "+---------------------------------------------------------------------------------+",
@@ -468,7 +467,7 @@
                 "type": "ascii",
                 "preset": 81,
                 "hint1": "blabla",
-                "label": "Perdu dans la foret",
+                "label": " ",
                 "ascii": [
                   "",
                   "+---------------------------------------------------------------------------------+",
@@ -532,7 +531,7 @@
                 "type": "ascii",
                 "preset": 81,
                 "hint1": "blabla",
-                "label": "Rebus de poche",
+                "label": "L'épreuve du Rébus",
                 "ascii": [
                   "",
                   "+---------------------------------------------------------------------------------+",
@@ -593,7 +592,7 @@
                 ]
               }
             ]
-        }
+          } 
       ]
     },
     {
@@ -602,21 +601,20 @@
         {
           "type": "ascii",
           "preset": 83,
-          "path": "?/User",
-          "label": "Acte 1",
+          "path": "?/User/Actes2",
+          "label": "Acte 2",
           "ascii": [
             "",
-"       d8888  .d8888b. 88888888888 8888888888       .d8888b.  ",
-"      d88888 d88P  Y88b    888     888             d88P  Y88b ",
-"     d88P888 888    888    888     888                    888 ",
-"    d88P 888 888           888     8888888              .d88P ",
-"   d88P  888 888           888     888              .od888P\"  ",
-"  d88P   888 888    888    888     888             d88P\"      ",
-" d8888888888 Y88b  d88P    888     888             888\"       ",
-"d88P     888  \"Y8888P\"     888     8888888888      888888888  "
-    
- ]
-}
+            "       d8888  .d8888b. 88888888888 8888888888       .d8888b.  ",
+            "      d88888 d88P  Y88b    888     888             d88P  Y88b ",
+            "     d88P888 888    888    888     888                    888 ",
+            "    d88P 888 888           888     8888888              .d88P ",
+            "   d88P  888 888           888     888              .od888P\"  ",
+            "  d88P   888 888    888    888     888             d88P\"      ",
+            " d8888888888 Y88b  d88P    888     888             888\"       ",
+            "d88P     888  \"Y8888P\"     888     8888888888      888888888  "
+          ]
+        }
       ]
     }
   ]
