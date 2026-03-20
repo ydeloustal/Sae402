@@ -22,7 +22,6 @@ export const state = {
     asciiDefaultHeight: 12,
     history: [],
     historyPointer: -1,
-    commandLogs: [],
     currentPath: "",
     lastCheckpoint: 0,
     checkpointQueue: null,

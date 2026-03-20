@@ -3,9 +3,7 @@ import { printLine, setPrintNext } from "./functions/printLine.js";
 import { runCommand } from "./functions/runCommand.js";
 import { loadStory } from "./functions/loadStory.js";
 import { printNext } from "./functions/printNext.js";
-import { initLogsAutoScroll } from "./functions/initLogsAutoScroll.js";
 import { keepTerminalInputFocused } from "./functions/keepTerminalInputFocused.js";
-import { initCommandLogs } from "./functions/logExecutedCommand.js";
 
 setPrintNext(printNext);
 
@@ -103,6 +101,4 @@ commandInput.addEventListener("input", () => {
 loadStory();
 const promptSpan = document.querySelector("#inputLine .invite_terminal");
 if (promptSpan) promptSpan.textContent = `${state.currentPath}>`;
-initCommandLogs();
-initLogsAutoScroll();
 keepTerminalInputFocused(commandInput);
