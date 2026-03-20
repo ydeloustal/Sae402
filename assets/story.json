@@ -730,6 +730,11 @@
               ]
             },
             {
+              "type": "guess-word",
+              "answer": "core",
+              "hint1": "En trouvant la sortie tu trouveras les lettres qui te donneront un mot"
+            },
+            {
               "type": "ascii",
               "preset": 83,
               "path": "?/User/Actes2",
@@ -828,6 +833,11 @@
                 "|   `   `   `             .         ..       `    `   .      `       .            |",
                 "+---------------------------------------------------------------------------------+"
               ]
+            },
+            {
+              "type": "guess-word",
+              "answer": "symfony",
+              "hint1": "Fait attention à leur chant, peut être souhaitent ils te passer un message"
             },
             {
               "type": "ascii",
