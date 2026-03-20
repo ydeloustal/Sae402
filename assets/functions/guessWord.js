@@ -2,7 +2,11 @@ import { state, commandInput } from "./state.js";
 import { printLine } from "./printLine.js";
 
 export function startGuessWord(entry, onSuccess) {
-    const answer = (entry.answer || "").trim().toLowerCase();
+    // Support answer (singulier) et answers (pluriel)
+    const answers = Array.isArray(entry.answers)
+        ? entry.answers.map(a => a.trim().toLowerCase())
+        : [(entry.answer || "").trim().toLowerCase()];
+
     const asciiLines = Array.isArray(entry.ascii) ? entry.ascii : null;
 
     const overlay = document.getElementById("guessWordChallenge");
@@ -13,7 +17,16 @@ export function startGuessWord(entry, onSuccess) {
     const reopenBtn = document.getElementById("guessWordReopen");
     const feedbackEl = document.getElementById("guessWordFeedback");
 
-    // Affiche ou cache l'ascii
+    let currentIndex = 0;
+
+    function updatePrompt() {
+        if (answers.length > 1) {
+            input.placeholder = `Mot ${currentIndex + 1}/${answers.length}...`;
+        } else {
+            input.placeholder = "Votre réponse...";
+        }
+    }
+
     if (asciiLines) {
         asciiEl.textContent = asciiLines.join("\n");
         asciiEl.classList.remove("hidden");
@@ -26,6 +39,7 @@ export function startGuessWord(entry, onSuccess) {
     feedbackEl.className = "guess-word-feedback";
     reopenBtn.classList.add("hidden");
     overlay.classList.remove("hidden");
+    updatePrompt();
 
     state.isTyping = true;
     commandInput.disabled = true;
@@ -33,14 +47,26 @@ export function startGuessWord(entry, onSuccess) {
 
     function validate() {
         const typed = input.value.trim().toLowerCase();
-        if (typed === answer) {
-            overlay.classList.add("hidden");
-            reopenBtn.classList.add("hidden");
-            commandInput.disabled = false;
-            commandInput.focus();
-            state.isTyping = false;
-            printLine("Bonne réponse !", "system", true);
-            onSuccess();
+
+        if (typed === answers[currentIndex]) {
+            currentIndex += 1;
+            input.value = "";
+            feedbackEl.textContent = "";
+            feedbackEl.className = "guess-word-feedback";
+
+            if (currentIndex >= answers.length) {
+                overlay.classList.add("hidden");
+                reopenBtn.classList.add("hidden");
+                commandInput.disabled = false;
+                commandInput.focus();
+                state.isTyping = false;
+                printLine("Bonne réponse !", "system", true);
+                onSuccess();
+            } else {
+                updatePrompt();
+                printLine(`Mot ${currentIndex}/${answers.length} correct !`, "system", true);
+                input.focus();
+            }
         } else {
             feedbackEl.textContent = "Mauvaise réponse, réessayez.";
             feedbackEl.classList.add("incorrect");
