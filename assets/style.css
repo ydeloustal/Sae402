@@ -371,6 +371,113 @@ main {
     display: none;
 }
 
+.guess-word {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.guess-word.hidden {
+    display: none;
+}
+
+.guess-word-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 700px;
+    width: 90%;
+}
+
+.guess-word-ascii {
+    font-family: "Roboto Mono", monospace;
+    color: var(--text-default);
+    white-space: pre;
+    text-align: center;
+    line-height: 1.15;
+    border: 1px solid var(--chrome-border);
+    padding: 1rem 2rem;
+}
+
+.guess-word-ascii.hidden {
+    display: none;
+}
+
+#guessWordInput {
+    width: 400px;
+    max-width: 90%;
+    background: #111;
+    border: 1px solid var(--chrome-border);
+    color: var(--text-default);
+    font: inherit;
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    outline: none;
+    caret-color: var(--text-tag);
+    text-align: center;
+}
+
+.guess-word-feedback {
+    font-size: 0.95rem;
+    min-height: 1.4rem;
+    color: transparent;
+}
+
+.guess-word-feedback.incorrect {
+    color: #ff4444;
+}
+
+.guess-word-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.guess-word-btn {
+    background: transparent;
+    border: 1px solid var(--chrome-border);
+    color: var(--text-tag);
+    font: inherit;
+    font-size: 0.95rem;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+}
+
+.guess-word-btn:hover {
+    background: var(--chrome-border);
+    color: #000;
+}
+
+.guess-word-reopen {
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    background: transparent;
+    border: 1px solid var(--chrome-border);
+    color: var(--text-tag);
+    font: inherit;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    z-index: 50;
+}
+
+.guess-word-reopen.hidden {
+    display: none;
+}
+
+.guess-word-reopen:hover {
+    background: var(--chrome-border);
+    color: #000;
+}
+
 /* FOOTER */
 
 footer {

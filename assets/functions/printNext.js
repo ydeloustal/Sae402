@@ -5,6 +5,7 @@ import { formatLine } from "./formatLine.js";
 import { printWait } from "./printWait.js";
 import { loadActe } from "./loadActe.js";
 import { startTypingChallenge } from "./typingChallenge.js";
+import { startGuessWord } from "./guessWord.js";
 
 async function handleEndOfQueue() {
     if (!state.hasPromptedZoneChoice) {
@@ -102,6 +103,10 @@ export async function printNext() {
     } else if (entry.type === "typing-challenge") {
         await new Promise((resolve) => {
             startTypingChallenge(entry, resolve);
+        });
+    } else if (entry.type === "guess-word") {
+        await new Promise((resolve) => {
+            startGuessWord(entry, resolve);
         });
     } else {
         await printLine(formatLine(entry), entry.type || "character", false, { mode: "prompt" });
