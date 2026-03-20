@@ -46,7 +46,7 @@ export async function runCommand(rawCommand) {
 		const zoneEntries = zoneKey ? state.zones[zoneKey]?.panels : null;
 
 		if (!zoneKey || !Array.isArray(zoneEntries) || zoneEntries.length === 0) {
-			printLine("Choix invalide. Tape A, B ou C.", "system", true);
+			printLine("Choix invalide. Tape 1 ou 2.", "system", true);
 			return;
 		}
 
@@ -77,7 +77,6 @@ export async function runCommand(rawCommand) {
 		printLine("Commandes disponibles:", "system", true);
 		printLine("- next : affiche la ligne suivante du recit", "system", true);
 		printLine("- help : affiche cette aide", "system", true);
-		printLine("- A/B/C : choisit une zone quand le choix est demande", "system", true);
 		return;
 	}
 
