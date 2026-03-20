@@ -3,23 +3,6 @@ import { normalizeCommand } from "./normalizeCommand.js";
 import { printCommandEcho } from "./printCommandEcho.js";
 import { printLine } from "./printLine.js";
 import { printNext } from "./printNext.js";
-import { logExecutedCommand } from "./logExecutedCommand.js";
-
-const KNOWN_COMMANDS = new Set([
-	"next",
-	"help",
-	"ping",
-	"a",
-	"b",
-	"c",
-	"zonea",
-	"zoneb",
-	"zonec",
-	"zone a",
-	"zone b",
-	"zone c",
-	"hint",
-]);
 
 function resolveZoneKey(command, zones) {
     const keys = Object.keys(zones);
@@ -36,10 +19,6 @@ export async function runCommand(rawCommand) {
 	}
 
 	printCommandEcho(command);
-	logExecutedCommand(command, {
-		isKnown: KNOWN_COMMANDS.has(command),
-		typedValue: rawCommand,
-	});
 
 	if (state.awaitingZoneChoice) {
 		const zoneKey = resolveZoneKey(command, state.zones);
