@@ -58,6 +58,26 @@
         <input id="typingInput" type="text" autocomplete="off" spellcheck="false">
         <button id="typingRetry">Réessayer</button>
     </div>
+    <div id="killVirusOverlay" class="kill-virus hidden">
+        <div class="kill-virus-inner">
+            <div class="kill-virus-header">
+                <span>SYSTEM ALERT</span>
+            </div>
+            <div class="kill-virus-body">
+                <pre class="kill-virus-ascii">
+    ██╗   ██╗██╗██████╗ ██╗   ██╗███████╗
+    ██║   ██║██║██╔══██╗██║   ██║██╔════╝
+    ██║   ██║██║██████╔╝██║   ██║███████╗
+    ╚██╗ ██╔╝██║██╔══██╗██║   ██║╚════██║
+    ╚████╔╝ ██║██║  ██║╚██████╔╝███████║
+        ╚═══╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+                </pre>
+                <p class="kill-virus-text">> Félicitations, vous avez éliminé le virus.</p>
+                <p class="kill-virus-text">> Système stabilisé.</p>
+                <button id="killVirusConfirm" class="kill-virus-btn">[ OK ]</button>
+            </div>
+        </div>
+    </div>
     <script type="module" src="assets/main.js"></script>
     <script>
         const text = "Réalisé par SOM DE ARAUJO Charlotte / RICHAND Enzo / VERZELETTI Maxime / DELOUSTAL YOAN / LAURENT Etan";

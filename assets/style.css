@@ -478,6 +478,78 @@ main {
     color: #000;
 }
 
+/* KILL VIRUS */
+
+.kill-virus {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+}
+
+.kill-virus.hidden {
+    display: none;
+}
+
+.kill-virus-inner {
+    border: 2px solid #00ff00;
+    background: #000;
+    width: 600px;
+    max-width: 90%;
+    font-family: "Roboto Mono", monospace;
+}
+
+.kill-virus-header {
+    background: #00ff00;
+    color: #000;
+    padding: 0.4rem 1rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.kill-virus-body {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.kill-virus-ascii {
+    color: #00ff00;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.kill-virus-text {
+    color: #00ff00;
+    font-size: 0.95rem;
+    align-self: flex-start;
+}
+
+.kill-virus-btn {
+    background: transparent;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    font: inherit;
+    font-size: 1rem;
+    padding: 0.4rem 2rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.kill-virus-btn:hover {
+    background: #00ff00;
+    color: #000;
+}
+
 /* FOOTER */
 
 footer {

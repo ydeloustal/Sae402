@@ -6,6 +6,7 @@ import { printWait } from "./printWait.js";
 import { loadActe } from "./loadActe.js";
 import { startTypingChallenge } from "./typingChallenge.js";
 import { startGuessWord } from "./guessWord.js";
+import { startKillVirus } from "./killVirus.js";
 
 async function handleEndOfQueue() {
     if (!state.hasPromptedZoneChoice) {
@@ -106,6 +107,11 @@ export async function printNext() {
         });
     } else if (entry.type === "guess-word") {
         startGuessWord(entry, () => printNext());
+        return;
+    } else if (entry.type === "kill-virus") {
+        state.killVirusActive = true;
+        state.isTyping = true;
+        printLine("Tape 'kill --virus' pour continuer.", "system", true);
         return;
     } else {
         await printLine(formatLine(entry), entry.type || "character", false, { mode: "prompt" });

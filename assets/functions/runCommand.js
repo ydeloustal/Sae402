@@ -3,6 +3,7 @@ import { normalizeCommand } from "./normalizeCommand.js";
 import { printCommandEcho } from "./printCommandEcho.js";
 import { printLine } from "./printLine.js";
 import { printNext } from "./printNext.js";
+import { startKillVirus } from "./killVirus.js";
 
 function resolveZoneKey(command, zones) {
     const keys = Object.keys(zones);
@@ -16,46 +17,61 @@ export async function runCommand(rawCommand) {
 
     if (!command) return;
 
+    if (state.killVirusActive) {
+        printCommandEcho(command);
+        if (command === "kill --virus") {
+            state.killVirusActive = false;
+            state.isTyping = false;
+            await new Promise((resolve) => {
+                startKillVirus(resolve);
+            });
+            await printNext();
+        } else {
+            printLine("Commande bloquée. Tape 'kill --virus' pour continuer.", "system", true);
+        }
+        return;
+    }
+
     if (state.guessWordActive) {
-		const typed = command.trim().toLowerCase();
+        const typed = command.trim().toLowerCase();
 
-		if (typed === "hint") {
-			const hint = state.currentHints[state.currentHintIndex];
-			if (!hint) {
-				printLine("Aucun indice disponible.", "system", true);
-				return;
-			}
-			const total = Object.keys(state.currentHints).length;
-			printLine(`Indice ${state.currentHintIndex}/${total}: ${hint}`, "system", true);
-			state.currentHintIndex += 1;
-			return;
-		}
+        if (typed === "hint") {
+            const hint = state.currentHints[state.currentHintIndex];
+            if (!hint) {
+                printLine("Aucun indice disponible.", "system", true);
+                return;
+            }
+            const total = Object.keys(state.currentHints).length;
+            printLine(`Indice ${state.currentHintIndex}/${total}: ${hint}`, "system", true);
+            state.currentHintIndex += 1;
+            return;
+        }
 
-		const matchIndex = state.guessWordAnswers.findIndex(
-			(a, i) => a === typed && !state.guessWordFoundIndexes.includes(i)
-		);
+        const matchIndex = state.guessWordAnswers.findIndex(
+            (a, i) => a === typed && !state.guessWordFoundIndexes.includes(i)
+        );
 
-		if (matchIndex !== -1) {
-			state.guessWordFoundIndexes.push(matchIndex);
-			const remaining = state.guessWordAnswers.length - state.guessWordFoundIndexes.length;
+        if (matchIndex !== -1) {
+            state.guessWordFoundIndexes.push(matchIndex);
+            const remaining = state.guessWordAnswers.length - state.guessWordFoundIndexes.length;
 
-			if (remaining <= 0) {
-				state.guessWordActive = false;
-				state.isTyping = false;
-				commandInput.placeholder = "";
-				printLine("Bonne réponse !", "system", true);
-				const cb = state.guessWordCallback;
-				state.guessWordCallback = null;
-				cb();
-			} else {
-				commandInput.placeholder = `${remaining} mot(s) restant(s)...`;
-				printLine(`Mot trouvé ! Il en reste ${remaining}.`, "system", true);
-			}
-		} else {
-			printLine("Mauvaise réponse, réessayez.", "system", true);
-		}
-		return;
-	}
+            if (remaining <= 0) {
+                state.guessWordActive = false;
+                state.isTyping = false;
+                commandInput.placeholder = "";
+                printLine("Bonne réponse !", "system", true);
+                const cb = state.guessWordCallback;
+                state.guessWordCallback = null;
+                cb();
+            } else {
+                commandInput.placeholder = `${remaining} mot(s) restant(s)...`;
+                printLine(`Mot trouvé ! Il en reste ${remaining}.`, "system", true);
+            }
+        } else {
+            printLine("Mauvaise réponse, réessayez.", "system", true);
+        }
+        return;
+    }
 
     printCommandEcho(command);
 
@@ -92,8 +108,11 @@ export async function runCommand(rawCommand) {
 
     if (command === "help") {
         printLine("Commandes disponibles:", "system", true);
-        printLine("- next : affiche la ligne suivante du recit", "system", true);
-        printLine("- help : affiche cette aide", "system", true);
+        printLine("- next        : affiche la ligne suivante du récit", "system", true);
+        printLine("- back        : revient au dernier checkpoint", "system", true);
+        printLine("- hint        : donne un indice sur l'énigme actuelle", "system", true);
+        printLine("- 1 ou 2      : choisit un chemin quand le choix est demandé", "system", true);
+        printLine("- help        : affiche cette aide", "system", true);
         return;
     }
 

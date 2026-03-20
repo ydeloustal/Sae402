@@ -34,6 +34,7 @@ export const state = {
     guessWordCallback: null,
     guessWordAnswers: [],
     guessWordFoundIndexes: [],
+    killVirusActive: false,
 };
 
 export const shellPath = "";
