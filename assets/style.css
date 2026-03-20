@@ -270,6 +270,107 @@ main {
   caret-color: #ffffff;
 }
 
+.typing-challenge {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    z-index: 100;
+    padding: 2rem;
+}
+
+.typing-challenge.hidden {
+    display: none;
+}
+
+.typing-timer {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-tag);
+}
+
+.typing-timer.danger {
+    color: #ff4444;
+}
+
+.typing-words {
+    font-size: 1.1rem;
+    line-height: 2;
+    max-width: 800px;
+    text-align: center;
+    letter-spacing: 0.05em;
+}
+
+.typing-words .word {
+    display: inline-block;
+    margin: 0 0.3rem;
+}
+
+.typing-words .letter {
+    color: #555;
+}
+
+.typing-words .letter.correct {
+    color: var(--text-tag);
+}
+
+.typing-words .letter.incorrect {
+    color: #ff4444;
+}
+
+.typing-words .letter.current {
+    border-bottom: 2px solid #ffffff;
+}
+
+.typing-words .word.done .letter {
+    border-bottom: none;
+}
+
+#typingInput {
+    width: 500px;
+    max-width: 90%;
+    background: #111;
+    border: 1px solid var(--chrome-border);
+    color: var(--text-default);
+    font: inherit;
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    outline: none;
+    caret-color: var(--text-tag);
+}
+
+.typing-result {
+    font-size: 1rem;
+    color: var(--text-system);
+    text-align: center;
+}
+
+.typing-retry {
+    background: transparent;
+    border: 1px solid var(--chrome-border);
+    color: var(--text-tag);
+    font: inherit;
+    font-size: 0.95rem;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+}
+
+.typing-retry:hover {
+    background: var(--chrome-border);
+    color: #000;
+}
+
+.typing-retry.hidden {
+    display: none;
+}
+
 /* FOOTER */
 
 footer {

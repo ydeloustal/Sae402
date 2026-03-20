@@ -4,6 +4,7 @@ import { printAscii } from "./printAscii.js";
 import { formatLine } from "./formatLine.js";
 import { printWait } from "./printWait.js";
 import { loadActe } from "./loadActe.js";
+import { startTypingChallenge } from "./typingChallenge.js";
 
 async function handleEndOfQueue() {
     if (!state.hasPromptedZoneChoice) {
@@ -98,6 +99,10 @@ export async function printNext() {
         await printAscii(entry);
     } else if (entry.type === "wait") {
         await printWait(entry);
+    } else if (entry.type === "typing-challenge") {
+        await new Promise((resolve) => {
+            startTypingChallenge(entry, resolve);
+        });
     } else {
         await printLine(formatLine(entry), entry.type || "character", false, { mode: "prompt" });
     }
