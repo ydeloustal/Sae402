@@ -24,14 +24,14 @@
         "",
         "             @@@@@@@@@@@@@\\               root@GT610",
         "             ````````````@@               ----------",
-        "             @@ #######\\ @@               Consignes : Dans cette aventure, résolvez des enigmes,",
-        "             @@ ######## @@               tout se fera au clavier et des textes bla bla bla lorem",
-        "             @@ ##ASC### @@               ipsum dolor si amet refaire la consigne svp je sais pas",
-        "             @@ ######## @@               ecrire",
-        "             @@ \\####### @@               Tips : lorem ipsum dolor si amet refaire la consigne",
-        "             @@,,,,,,,,, @@               svp je sais pas ecrire, lorem ipsum dolor sit amet et",
-        "             \\@@@@@@@@@@ @@               tout la c'est trop bien le lorem",
-        ""
+        "             @@ #######\\ @@               Dans cette aventure, résolvez des enigmes et",
+        "             @@ ######## @@               découvrez les mystères que cache ce monde",
+        "             @@ ##ASC### @@                                                         ",
+        "             @@ ######## @@               Toutes les interactions se feront au clavier",
+        "             @@ \\####### @@               sous forme de commandes.",
+        "             @@,,,,,,,,, @@                                                         ",
+        "             \\@@@@@@@@@@ @@               Un rappel des différentes commandes est ",
+        "                                          disponible à gauche du terminal.   "
       ]
     }
   ],
@@ -252,7 +252,7 @@
       "chemins": [
         {
           "id": "chemin1",
-          "label": "Prés",
+          "label": "Près",
           "panels": [
             {
               "type": "ascii",
@@ -359,7 +359,7 @@
         },
         {
           "id": "chemin2",
-          "label": "Bois",
+          "label": "Foret",
           "panels": [
             {
               "type": "ascii",
@@ -398,7 +398,6 @@
               "path": "Acte1/Bois/User",
               "preset": 81,
               "label": "Le miroir",
-              "autonext": true,
               "ascii": [
                 "",
                 "+---------------------------------------------------------------------------------+",
