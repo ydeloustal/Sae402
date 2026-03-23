@@ -99,7 +99,7 @@ export async function runCommand(rawCommand) {
 
     if (command === "next") {
         if (state.isStoryEnded) {
-            printLine("Le recit est termine. Modifie story.json pour continuer.", "system", true);
+            printLine("Le recit est termine. ", "system", true);
             return;
         }
         await printNext();

@@ -498,7 +498,7 @@ main {
 }
 
 .kill-virus-inner {
-    border: 2px solid #00ff00;
+    border: 2px solid var(--text-tag);
     background: #000;
     width: 600px;
     max-width: 90%;
@@ -506,7 +506,7 @@ main {
 }
 
 .kill-virus-header {
-    background: #00ff00;
+    background: var(--text-tag);
     color: #000;
     padding: 0.4rem 1rem;
     font-weight: 700;
@@ -522,22 +522,22 @@ main {
 }
 
 .kill-virus-ascii {
-    color: #00ff00;
+    color: var(--text-tag);
     font-size: 0.75rem;
     line-height: 1.2;
     text-align: center;
 }
 
 .kill-virus-text {
-    color: #00ff00;
+    color: var(--text-tag);
     font-size: 0.95rem;
     align-self: flex-start;
 }
 
 .kill-virus-btn {
     background: transparent;
-    border: 1px solid #00ff00;
-    color: #00ff00;
+    border: 1px solid var(--text-tag);
+    color: var(--text-tag);
     font: inherit;
     font-size: 1rem;
     padding: 0.4rem 2rem;
@@ -546,7 +546,7 @@ main {
 }
 
 .kill-virus-btn:hover {
-    background: #00ff00;
+    background: var(--text-tag);
     color: #000;
 }
 

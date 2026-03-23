@@ -5,7 +5,7 @@
       "type": "system",
       "mode": "plain",
       "path": "",
-      "text": "Initialisation de la session{{dots:1s}}{{next}}"
+      "text": "Initialisation de la session{{dots:3s}}{{next}}"
     },
     {
       "type": "ascii",
@@ -15,7 +15,7 @@
       "autonext": true,
       "ascii": [
         "",
-        "AscOs 5.13.12-arch1-1 (tty1)",
+        "AscOS 5.13.12-arch1-1 (tty1)",
         "",
         "MMI3 login: root",
         "Password: *******",
@@ -42,7 +42,7 @@
         {
           "type": "ascii",
           "preset": 83,
-          "path": "Acte1/User",
+          "path": "acte1\\User",
           "label": " ",
           "ascii": [
             "       d8888  .d8888b. 88888888888 8888888888       d888  ",
@@ -57,7 +57,7 @@
         },
         {
           "type": "ascii",
-          "path": "Acte1/User",
+          "path": "acte1\\User",
           "label": " ",
           "ascii": [
             "┌─────────────────────────────────────────────────────────────────────────────────┐",
@@ -87,7 +87,7 @@
         },
         {
           "type": "ascii",
-          "path": "Acte1/User",
+          "path": "acte1\\User",
           "label": " ",
           "ascii": [
             "",
@@ -118,7 +118,7 @@
         },
         {
           "type": "ascii",
-          "path": "Acte1/User",
+          "path": "acte1\\User",
           "preset": 83,
           "label": " ",
           "ascii": [
@@ -150,7 +150,7 @@
         },
         {
           "type": "ascii",
-          "path": "Acte1/User",
+          "path": "acte1\\User",
           "label": " ",
           "ascii": [
             "",
@@ -181,7 +181,7 @@
         },
         {
           "type": "ascii",
-          "path": "Acte1/User",
+          "path": "acte1\\User",
           "preset": 83,
           "label": " ",
           "ascii": [
@@ -213,7 +213,7 @@
         },
         {
           "type": "ascii",
-          "path": "Acte1/User",
+          "path": "acte1\\User",
           "label": "Choix de Routes",
           "checkpoint": true,
           "autonext": true,
@@ -252,11 +252,11 @@
       "chemins": [
         {
           "id": "chemin1",
-          "label": "Près",
+          "label": "Bois",
           "panels": [
             {
               "type": "ascii",
-              "path": "Acte1/Prés/User",
+              "path": "acte1\\Bois\\User",
               "preset": 81,
               "label": "Le livre",
               "ascii": [
@@ -288,7 +288,7 @@
             },
             {
               "type": "ascii",
-              "path": "Acte1/Prés/User",
+              "path": "acte1\\Bois\\User",
               "preset": 81,
               "label": " ",
               "ascii": [
@@ -320,7 +320,7 @@
             },
             {
               "type": "ascii",
-              "path": "Acte1/Prés/User",
+              "path": "acte1\\Bois\\User",
               "preset": 81,
               "label": "L'épreuve du livre",
               "ascii": [
@@ -352,20 +352,20 @@
             },
             {
               "type": "typing-challenge",
-              "words": 20,
-              "time": 60
+              "words": 10,
+              "time": 30
             }
           ]
         },
         {
           "id": "chemin2",
-          "label": "Foret",
+          "label": "Prés",
           "panels": [
             {
               "type": "ascii",
-              "path": "Acte1/Bois/User",
+              "path": "acte1\\Prés\\User",
               "preset": 81,
-              "label": "Forêt dense",
+              "label": "Prés",
               "ascii": [
                 "",
                 "+---------------------------------------------------------------------------------+",
@@ -395,9 +395,10 @@
             },
             {
               "type": "ascii",
-              "path": "Acte1/Bois/User",
+              "path": "acte1\\Prés\\User",
               "preset": 81,
               "label": "Le miroir",
+              "autonext": true,
               "ascii": [
                 "",
                 "+---------------------------------------------------------------------------------+",
@@ -431,11 +432,14 @@
               "hint1": "Observez le miroir, voyez vous des différences",
               "hint2": "3 différences se trouvent dans le miroir",
               "hint3": "deux sont dans le ciel",
-              "hint4": "l'un est au pied de l'arbre"
+              "hint4": "l'un est au pied de l'arbre",
+              "hint5": "Réponse 1 : oiseau",
+              "hint6": "Réponse 2 : soleil",
+              "hint7": "Réponse 3 : fleur"
             },
             {
               "type": "ascii",
-              "path": "Acte1/Bois/User",
+              "path": "acte1\\Prés\\User",
               "preset": 81,
               "label": " ",
               "ascii": [
@@ -467,7 +471,7 @@
             },
             {
               "type": "ascii",
-              "path": "Acte1/Bois/User",
+              "path": "acte1\\Prés\\User",
               "preset": 81,
               "label": "Symbole étrange",
               "ascii": [
@@ -499,7 +503,7 @@
             },
             {
               "type": "ascii",
-              "path": "Acte1/Bois/User",
+              "path": "acte1\\Prés\\User",
               "preset": 81,
               "label": "L'épreuve du Rébus",
               "autonext": true,
@@ -534,11 +538,12 @@
               "type": "guess-word",
               "answer": "dossier",
               "hint1": "une note de musique",
-              "hint2": "un outil qui coupe du bois"
+              "hint2": "un outil qui coupe du bois",
+              "hint3": "Réponse : dossier"
             },
             {
               "type": "ascii",
-              "path": "Acte1/Bois/User",
+              "path": "acte1\\Prés\\User",
               "preset": 81,
               "label": "Epreuve réussie",
               "ascii": [
@@ -578,7 +583,7 @@
         {
           "type": "ascii",
           "preset": 83,
-          "path": "Acte2/User",
+          "path": "acte2\\User",
           "label": " ",
           "ascii": [
             "",
@@ -595,7 +600,7 @@
         {
           "type": "ascii",
           "preset": 83,
-          "path": "Acte2/User",
+          "path": "acte2\\User",
           "label": " ",
           "ascii": [
             "",
@@ -627,7 +632,7 @@
         {
           "type": "ascii",
           "preset": 83,
-          "path": "Acte2/User",
+          "path": "acte2\\API City\\User",
           "checkpoint": true,
           "label": " ",
           "ascii": [
@@ -666,7 +671,7 @@
             {
             "type": "ascii",
             "preset": 83,
-            "path": "Acte2/Labyrinthe/User",
+            "path": "acte2\\API City\\Labyrinthe\\User",
             "label": " ",
             "ascii": [
               "",
@@ -698,7 +703,7 @@
             {
               "type": "ascii",
               "preset": 83,
-              "path": "Acte2/Labyrinthe/User",
+              "path": "acte2\\API City\\Labyrinthe\\User",
               "label": "Epreuve labyrinthe",
               "autonext": true,
               "ascii": [
@@ -731,12 +736,13 @@
             {
               "type": "guess-word",
               "answer": "core",
-              "hint1": "En trouvant la sortie tu trouveras les lettres qui te donneront un mot"
+              "hint1": "En trouvant la sortie tu trouveras les lettres qui te donneront un mot",
+              "hint2": "Réponse : core"
             },
             {
               "type": "ascii",
               "preset": 83,
-              "path": "Acte2/Labyrinthe/User",
+              "path": "acte2\\API City\\Labyrinthe\\User",
               "label": " ",
               "ascii": [
                 "",
@@ -773,7 +779,7 @@
           "panels": [
             {
               "type": "ascii",
-              "path": "Acte2/Ruines/User",
+              "path": "acte2\\API City\\Ruines\\User",
               "preset": 81,
               "label": " ",
               "ascii": [
@@ -805,7 +811,7 @@
             },
             {
               "type": "ascii",
-              "path": "Acte2/Ruines/User",
+              "path": "acte2\\API City\\Ruines\\User",
               "preset": 81,
               "label": "Epreuve phantom",
               "autonext": true,
@@ -839,11 +845,13 @@
             {
               "type": "guess-word",
               "answer": "symfony",
-              "hint1": "Fait attention à leur chant, peut être souhaitent ils te passer un message"
+              "hint1": "Fait attention à leur chant, peut être souhaitent ils te passer un message",
+              "hint2": "Réponse : symfony"
+
             },
             {
               "type": "ascii",
-              "path": "Acte2/Ruines/User",
+              "path": "acte2\\API City\\Ruines\\User",
               "preset": 81,
               "label": " ",
               "ascii": [
@@ -872,7 +880,14 @@
                 "|               d88P'    8b      '\"Y88.                                           |",
                 "+---------------------------------------------------------------------------------+"
               ]
+            },
+            {
+              "type": "system",
+              "mode": "plain",
+              "path": "",
+              "text": " "
             }
+            
           ]
         }
       ]
@@ -882,7 +897,7 @@
       "panels": [
         {
           "type": "ascii",
-          "path": "Acte2/User",
+          "path": "acte2\\User",
           "preset": 83,
           "label": " ",
           "ascii": [
@@ -914,7 +929,7 @@
         },
         {
           "type": "ascii",
-          "path": "Acte2/User",
+          "path": "acte2\\User",
           "preset": 83,
           "label": " ",
           "ascii": [
@@ -946,7 +961,7 @@
         },
         {
           "type": "ascii",
-          "path": "Acte2/User",
+          "path": "acte2\\User",
           "preset": 83,
           "label": " ",
           "autonext": true,
@@ -978,17 +993,24 @@
           ]
         },
         {
+          "type": "system",
+          "mode": "plain",
+          "path": "acte2\\Coco",
+          "text": "écrivez le mot sans espaces{{next}}"
+        },
+        {
           "type": "guess-word",
           "answer": "nomdedomaine",
-          "hint1": "non",
-          "hint2": "2",
-          "hint3": "do",
-          "hint4": "mai",
-          "hint5": "ne"
+          "hint1": "Mon premier : nom",
+          "hint2": "Mon deuxième : 2",
+          "hint3": "Mon troisième : do",
+          "hint4": "Mon quatrième : mai",
+          "hint5": "Mon dernier : ne",
+          "hint6": "Réponse : nomdedomaine"
         },
         {
           "type": "ascii",
-          "path": "Acte2/User",
+          "path": "acte2\\User",
           "preset": 83,
           "label": " ",
           "checkpoint": true,
@@ -1022,7 +1044,7 @@
         {
           "type": "ascii",
           "preset": 83,
-          "path": "Acte3/User",
+          "path": "acte3\\User",
           "label": " ",
           "ascii": [
             "",
@@ -1038,7 +1060,7 @@
         },
         {
           "type": "ascii",
-          "path": "Acte3/User",
+          "path": "acte3\\Docker City\\User",
           "preset": 83,
           "label": " ",
           "ascii": [
@@ -1070,7 +1092,7 @@
         },
         {
           "type": "ascii",
-          "path": "Acte3/User",
+          "path": "acte3\\Docker City\\User",
           "preset": 83,
           "label": " ",
           "ascii": [
@@ -1102,9 +1124,10 @@
         },
         {
           "type": "ascii",
-          "path": "Acte3/User",
+          "path": "acte3\\Docker City\\User",
           "preset": 83,
           "label": " ",
+          "autonext": true,
           "ascii": [
             "",
 "+---------------------------------------------------------------------------------+",
@@ -1117,11 +1140,11 @@
 "|-------.  \\  /\\  /\\  /|                                | / __ \\ \\__/ / __ \\ \\__/ |",
 "|________'-...___      |                                |/ /  \\ \\____/ /  \\ \\____/|",
 "|-IFM----|-- ___ '''-, |                                |\\ \\__/ / __ \\ \\__/ / __ \\|",
-"|___________/\\\"''\\---/  |                  _____         | \\____/ /  \\ \\____/ /  \\ |",
+"|___________/\\\"''\\---/ |                  _____         | \\____/ /  \\ \\____/ /  \\ |",
 "|           =====      |              ___(     )_       | / __ \\ \\__/     .-------|",
 "|/__\\/__\\/__\\/__\\/__\\/_|             (___________)      |/ /      ___...-'________|",
 "|\\  /\\  /\\  /\\  /\\  /\\ |                                |\\ \\ ,-''' ___ --|---MPXP-|",
-"| \\/  \\/  \\/  \\/  \\/  \\|                                | \\_  \\---/''\\\"\\___________|",
+"| \\/  \\/  \\/  \\/  \\/  \\|                                | \\_ \\---/''\\\"\\___________|",
 "| /\\  /\\  /\\  /\\  /\\  /|                                | /       =====           |",
 "|/__\\/__\\/__\\/__\\/__\\/_|                                |/ /  \\ \\____/ /  \\ \\____/|",
 "|\\  /\\  /\\  /\\  /\\  /\\ |                                |\\ \\__/ / __ \\ \\__/ / __ \\|",
@@ -1132,7 +1155,7 @@
 "|\\      /     \\      .----------..__.-' |   / |  Trouvez vos     |  | \\____/ /  \\ |",
 "| \\____/     ___...-'_________||__'```-.| _/  |  prochaines      |_/| / __ \\ \\__/ |",
 "| /     ,-''' ___ --|---SME---/- ___   `\\  \\  |  vacances avec   | \\|/ /  \\ \\____/|",
-"|/       \\---/''\\\"\\______________/''\\\"\\,.-'   \\_|  Vacancia !      |  |\\ \\__/ / __ \\|",
+"|/       \\---/''\\\"\\______________/''\\\"\\,.-' \\_|  Vacancia !      |  |\\ \\__/ / __ \\|",
 "|\\           =====              =====       / '------------------'  | \\____/ /  \\ |",
 "| \\____/      \\____/      \\____/      \\____/      \\____/      \\____/| / __ \\ \\__/ |",
 "| /    \\      /    \\      /    \\      /    \\      /    \\      /    \\|/ /  \\ \\____/|",
@@ -1160,8 +1183,15 @@
           ]
         },
         {
+          "type": "guess-word",
+          "answer": "helloworld",
+          "hint1": "regardez bien les voitures",
+          "hint2": "observez le panneau en haut à droite",
+          "hint3": "Réponse : helloworld"
+        },
+        {
           "type": "ascii",
-          "path": "Acte3/User",
+          "path": "acte3\\Docker City\\User",
           "preset": 83,
           "label": " ",
           "ascii": [
@@ -1193,9 +1223,10 @@
         },
         {
           "type": "ascii",
-          "path": "Acte3/PASSW****/User",
+          "path": "acte3\\PASSW****\\User",
           "preset": 83,
           "label": " ",
+          "autonext": true,
           "ascii": [
             "",
 "+---------------------------------------------------------------------------------+",
@@ -1226,11 +1257,12 @@
         {
           "type": "guess-word",
           "answer": "bang",
-          "hint1": "regardez bien le clavier"
+          "hint1": "regardez bien le clavier",
+          "hint2": "Réponse : bang"
         },
         {
           "type": "ascii",
-          "path": "Acte3/PASSW****/User",
+          "path": "acte3\\PASSW****\\User",
           "preset": 83,
           "label": "BANG",
           "ascii": [
@@ -1262,7 +1294,7 @@
         },
         {
           "type": "ascii",
-          "path": "Acte3/PASSW****/User",
+          "path": "acte3\\PASSW****\\User",
           "preset": 83,
           "label": " ",
           "ascii": [
@@ -1294,7 +1326,7 @@
         },
         {
           "type": "ascii",
-          "path": "AcTe30/PAsSW****/uSeR",
+          "path": "AcTe30\\PAsSW****\\uSeR",
           "preset": 83,
           "label": "01100010 01100001 01101110 01100111",
           "ascii": [
@@ -1326,7 +1358,7 @@
         },
         {
           "type": "ascii",
-          "path": "ACte∞/pAsSM****/nsEEEER",
+          "path": "ACte∞\\pAsSM****\\nsEEEER",
           "preset": 83,
           "label": "01100010 01110101 01100111",
           "ascii": [
@@ -1358,7 +1390,7 @@
         },
         {
           "type": "ascii",
-          "path": "aCte∞/paSsM*.**/UsEEr",
+          "path": "aCte∞\\paSsM*.**\\UsEEr",
           "preset": 83,
           "label": "01110110 01101001 01110010 01110101 01110011",
           "ascii": [
@@ -1390,7 +1422,7 @@
         },
         {
           "type": "ascii",
-          "path": "AcTe30/PAsSW****/uSeR",
+          "path": "AcTe30\\PAsSW****\\uSeR",
           "preset": 83,
           "label": "01100011 01101111 01100011 01101111",
           "ascii": [
@@ -1422,9 +1454,10 @@
         },
         {
           "type": "ascii",
-          "path": "ACte∞/pAsSM****/nsEEEER",
+          "path": "ACte∞\\pAsSM****\\nsEEEER",
           "preset": 83,
           "label": "01100011 01101111 01100011 01101111",
+          "autonext": true,
           "ascii": [
             "",
 "               ░ ░ ░                ▒ ▒ ▒ ▒          ░ ░ ░                  1      ",
